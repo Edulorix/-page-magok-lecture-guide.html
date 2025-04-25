@@ -3,254 +3,485 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>LG전자 마곡 사이언스파크 [강의 안내]</title>
+  <title>LG전자 마곡 사이언스파크 강의 안내</title>
+  <!-- 무료 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"/>
   <style>
     :root {
-      --navy: #003f5c;
-      --mint: #2EC4B6;
-      --gray-light: #F5F5F5;
-      --radius: 8px;
-      --gap: 24px;
-      --font: 'Noto Sans KR', sans-serif;
+      --lg-red: #a50034;
+      --lg-gray: #58595b;
+      --lg-light-gray: #f8f8f8;
+      --lg-dark: #333333;
+      --radius: 10px;
+      --shadow-light: 0 2px 4px rgba(0,0,0,0.05);
+      --shadow-strong: 0 4px 8px rgba(0,0,0,0.1);
     }
-    * { box-sizing: border-box; }
     body {
-      margin:0; padding:var(--gap);
-      font-family:var(--font);
-      color:#333; background:#fff;
+      font-family: 'Noto Sans KR', sans-serif;
+      color: var(--lg-dark);
+      background: #f5f5f5;
       line-height:1.6;
+      padding-bottom:100px;
     }
-    h1 {
-      font-size:28px; font-weight:700; color:var(--navy);
-      margin-bottom:var(--gap);
+    .container {
+      max-width:900px;
+      margin:0 auto;
+      padding:1rem;
     }
-    h2 {
-      display:flex; align-items:center;
-      font-size:20px; font-weight:500; color:var(--navy);
-      margin: var(--gap) 0 12px;
-    }
-    h2 .emoji { margin-right:8px; }
-    .card {
-      background:#fff; border:1px solid var(--gray-light);
+    .header {
+      background:var(--lg-red);
+      padding:1.5rem;
       border-radius:var(--radius);
-      padding:var(--gap);
-      margin-bottom:var(--gap);
-      box-shadow:0 2px 4px rgba(0,0,0,0.05);
+      box-shadow:var(--shadow-strong);
+      margin-bottom:2rem;
+      color:#fff;
+      text-align:center;
     }
-    .btn { 
-      background:var(--navy); color:#fff;
-      padding:12px 20px; border:none;
-      border-radius:4px; cursor:pointer;
-      font-size:16px; font-weight:500;
+    h1 { font-size:28px; font-weight:700; margin:0; }
+    h2 {
+      font-size:22px; font-weight:600; color:var(--lg-dark);
+      border-bottom:2px solid var(--lg-red);
+      padding-bottom:.5rem; margin-bottom:1rem;
+      display:flex; align-items:center;
     }
-    .btn:hover { background:#002d46; }
-    a { color:var(--mint); text-decoration:underline; }
-    table { width:100%; border-collapse:collapse; margin-top:12px; }
-    th, td { border:1px solid var(--gray-light); padding:8px; text-align:left; }
-    th { background:var(--gray-light); }
-    th:nth-child(3), td:nth-child(3) { width:60px; }
-    .faq-item { margin-bottom:12px; border-radius:4px; overflow:hidden; }
+    h2 i { margin-right:.5rem; color:var(--lg-red); }
+    h3 {
+      font-size:18px; font-weight:500; color:var(--lg-dark);
+      margin-bottom:.75rem;
+    }
+    p,label { font-size:16px; }
+    .card {
+      background:#fff; border-radius:var(--radius);
+      padding:1.5rem; margin-bottom:1.5rem;
+      box-shadow:var(--shadow-light);
+      transition:transform .2s, box-shadow .2s;
+    }
+    .card:hover {
+      transform:translateY(-2px);
+      box-shadow:var(--shadow-strong);
+    }
+    .form-group { margin-bottom:1.25rem; }
+    .form-control {
+      width:100%; padding:.75rem;
+      border:1px solid #ddd; border-radius:8px;
+      transition:border-color .3s;
+    }
+    .form-control:focus {
+      outline:none; border-color:var(--lg-red);
+      box-shadow:0 0 0 3px rgba(165,0,52,0.1);
+    }
+    .btn {
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.75rem 1.5rem; border-radius:8px;
+      font-weight:500; cursor:pointer; transition:all .3s;
+    }
+    .btn-primary {
+      background:var(--lg-red); color:#fff; border:none;
+    }
+    .btn-primary:hover {
+      background:#8a0029; transform:translateY(-1px);
+    }
+    .btn-secondary {
+      background:#f0f0f0; color:var(--lg-dark);
+      border:1px solid #ddd;
+    }
+    .btn-secondary:hover { background:#e0e0e0; }
+    .floating-btn {
+      position:fixed; bottom:30px; right:30px; z-index:100;
+    }
+    .icon-text { display:flex; align-items:center; gap:.5rem; }
+    .checkbox-group {
+      display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem;
+    }
+    .important-note {
+      background:rgba(165,0,52,0.05);
+      border-left:4px solid var(--lg-red);
+      padding:.75rem; border-radius:0 var(--radius) var(--radius) 0;
+      margin:1rem 0;
+    }
+    .file-upload { display:flex; flex-direction:column; gap:.5rem; }
+    .file-upload label {
+      display:inline-block; padding:.5rem 1rem;
+      background:#f0f0f0; border-radius:6px; cursor:pointer;
+      transition:background .3s;
+    }
+    .file-upload label:hover { background:#e0e0e0; }
+    .equipment-table {
+      width:100%; border-collapse:collapse; margin:1rem 0;
+    }
+    .equipment-table th,
+    .equipment-table td {
+      padding:.75rem; border:1px solid #ddd; text-align:left;
+    }
+    .equipment-table th { background:var(--lg-light-gray); font-weight:500; }
+    .add-equipment-btn {
+      display:flex; align-items:center; gap:.5rem;
+      color:var(--lg-red); cursor:pointer; margin:1rem 0;
+    }
+    .map-container {
+      border:1px solid #ddd; border-radius:var(--radius);
+      overflow:hidden; margin:1rem 0;
+    }
+    .modal {
+      display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,0.5); z-index:1000;
+      align-items:center; justify-content:center;
+    }
+    .modal-content {
+      background:#fff; padding:2rem; border-radius:var(--radius);
+      max-width:500px; width:90%; position:relative;
+      box-shadow:0 4px 20px rgba(0,0,0,0.15);
+    }
+    .close-modal {
+      position:absolute; top:15px; right:15px;
+      font-size:24px; cursor:pointer; color:#666;
+    }
+    /* FAQ */
+    .faq-item { margin-bottom:1rem; border-radius:var(--radius); overflow:hidden; }
     .faq-question {
-      background:var(--gray-light); padding:12px; cursor:pointer;
-      display:flex; justify-content:space-between;
+      background:var(--lg-light-gray); padding:1rem; cursor:pointer;
+      display:flex; justify-content:space-between; align-items:center;
     }
-    .faq-answer { max-height:0; overflow:hidden; transition:max-height .3s ease; background:#fff; }
-    .faq-item.active .faq-answer { max-height:200px; padding:12px; }
+    .faq-answer {
+      max-height:0; overflow:hidden;
+      transition:max-height .3s ease, padding .3s ease;
+      background:#fff;
+    }
+    .faq-item.active .faq-answer {
+      padding:1rem; max-height:300px;
+    }
     .faq-toggle { transition:transform .3s ease; }
     .faq-item.active .faq-toggle { transform:rotate(180deg); }
-    @media(max-width:600px){
-      body{padding:12px;}
+    /* Responsive */
+    @media(max-width:768px){
+      .container { padding:.75rem; }
+      .card { padding:1.25rem; }
+      .floating-btn { bottom:20px; right:20px; padding:.75rem; }
+    }
+    @media(max-width:576px){
       h1{font-size:24px;}
-      h2{font-size:18px;}
+      h2{font-size:20px;}
+      h3{font-size:16px;}
+      .card{padding:1rem;}
     }
   </style>
 </head>
 <body>
 
-  <h1>LG전자 마곡 사이언스파크<br>[강의 안내]</h1>
-
-  <!-- 1. 링크 생성 -->
-  <div class="card">
-    <h2><span class="emoji">🔗</span>링크 생성 공유 방법</h2>
-    <ol>
-      <li>아래 양식을 작성한 뒤, 우측 하단의 <strong style="color:var(--navy);">링크 생성</strong> 버튼을 클릭해주세요.</li>
-      <li>생성된 링크를 복사해 운영자에게 메일로 회신 부탁드립니다 😊</li>
-    </ol>
-  </div>
-
-  <!-- 2. 사전 준비 -->
-  <div class="card">
-    <h2><span class="emoji">📋</span>사전 준비</h2>
-    <p><strong>설치 파일 및 프로그램 공유</strong> (설명 기재)</p>
-    <textarea placeholder="설치 파일/프로그램명을 입력해주세요." style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;" rows="1"></textarea>
-
-    <p style="margin-top:12px;"><strong>교재 제공 방식</strong></p>
-    <div>
-      <input type="checkbox" id="pdf"><label for="pdf"> PDF 교재</label>
-      <input type="checkbox" id="printed" style="margin-left:16px;"><label for="printed"> 서면 교재</label>
-      <input type="checkbox" id="none" style="margin-left:16px;"><label for="none"> 해당 사항 없음</label>
+  <div class="container">
+    <div class="header">
+      <h1>LG전자 마곡 사이언스파크<br>강의 안내</h1>
     </div>
-    <div id="printed-info" style="display:none; margin-top:12px;">
-      <p>교재 배송지: 서울 강서구 마곡중앙로 10로 10, W10동 지하1층 메일센터</p>
-      <a href="https://map.naver.com/p/search/LG%EC%82%AC%EC%9D%B4%EC%96%B8%EC%8A%A4%ED%8C%8C%ED%81%AC/place/1948693696" target="_blank">지도 보기</a>
-    </div>
-  </div>
 
-  <!-- 3. 출입 안내 -->
-  <div class="card">
-    <h2><span class="emoji">🚪</span>출입 안내</h2>
-    <p>🔗 <a href="https://portal.lg.com" target="_blank">방문포털 접속하기</a>하여 비회원 방문 예약으로 진행해 주세요.</p>
-    <p>노트북 등 기타 전자기기는 반입물품 정보에 필수 입력하셔야 합니다. (봉인 예외여부 체크 X)</p>
-    <div style="margin-top:12px;">
-      <p>1. LG 방문신청 서비스 약관: 모두 동의</p>
-      <p>2. 방문장소: LG전자 마곡</p>
-      <p>3. 운영자 정보: 김미진 (9698), 선송이 (7020), 유지혜 (0530), 정하연 (6894) ※교육서비스센터 팀명 확인</p>
-      <p>4. 방문 기간은 방문포털에서 설정해 주세요.</p>
+    <!-- 1. 링크 생성 -->
+    <div class="card">
+      <h2><i class="fas fa-link"></i> 링크 생성 공유 방법</h2>
+      <ol class="list-decimal pl-5 space-y-2">
+        <li>아래 양식을 작성한 뒤, 우측 하단의 <strong class="text-red-600">링크 생성</strong> 버튼을 클릭합니다.</li>
+        <li>생성된 링크를 복사하여 운영자에게 메일로 회신 부탁드립니다 😊</li>
+      </ol>
     </div>
-  </div>
 
-  <!-- 4. 강사 정보 -->
-  <div class="card">
-    <h2><span class="emoji">👤</span>강사 정보</h2>
-    <p><input type="text" placeholder="업체명 입력" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;"></p>
-    <p><input type="text" placeholder="성함 입력" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;"></p>
-    <p><input type="text" placeholder="연락처 입력" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:4px;"></p>
-    <p><strong>차량 정보</strong> (주차 시)</p>
-    <div id="vehicle">
-      <input type="checkbox" id="no-car"><label for="no-car"> 해당 사항 없음</label>
-      <div style="margin-top:12px;">
-        <input type="text" placeholder="차종" style="width:48%;padding:8px;border:1px solid #ccc;border-radius:4px;">
-        <input type="text" placeholder="차량번호" style="width:48%;padding:8px;border:1px solid #ccc;border-radius:4px;margin-left:4%;">
+    <!-- 2. 사전 확인 -->
+    <div class="card">
+      <h2><i class="fas fa-clipboard-check"></i> 사전 확인</h2>
+
+      <!-- 설치 파일/프로그램 공유 -->
+      <div class="form-group">
+        <h3 class="icon-text"><i class="fas fa-download text-blue-600"></i> 교육생이 사전 준비해야 하는 설치 파일/프로그램 공유</h3>
+        <div class="file-upload">
+          <input type="file" id="program-file" class="hidden">
+          <label for="program-file" class="btn btn-secondary"><i class="fas fa-file-upload"></i> 파일 선택</label>
+          <span id="program-file-name" class="text-gray-500">선택된 파일 없음</span>
+        </div>
+      </div>
+
+      <!-- 교재 제공 방식 -->
+      <div class="form-group">
+        <h3 class="icon-text"><i class="fas fa-book text-green-600"></i> 교재 제공 방식</h3>
+        <div class="checkbox-group">
+          <input type="checkbox" id="pdf-material"><label for="pdf-material"> PDF 교재</label>
+        </div>
+        <div id="pdf-material-file" class="hidden ml-6 mt-2">
+          <div class="file-upload">
+            <input type="file" id="pdf-file" class="hidden">
+            <label for="pdf-file" class="btn btn-secondary"><i class="fas fa-file-pdf"></i> 파일 선택</label>
+            <span id="pdf-file-name" class="text-gray-500">선택된 파일 없음</span>
+          </div>
+        </div>
+
+        <div class="checkbox-group mt-4">
+          <input type="checkbox" id="printed-material"><label for="printed-material"> 서면 교재</label>
+          <input type="checkbox" id="none-material" class="ml-4"><label for="none-material"> 해당 사항 없음</label>
+        </div>
+        <div id="printed-material-info" class="hidden ml-6 mt-2">
+          <div class="important-note">
+            <p><strong>교재 배송지:</strong> 서울 강서구 마곡중앙로 10로 10, W10동 지하1층 메일센터</p>
+            <a href="https://map.naver.com/p/search/LG%EC%82%AC%EC%9D%B4%EC%96%B8%EC%8A%A4%ED%8C%8C%ED%81%AC/place/1948693696" target="_blank" class="text-blue-600 hover:underline icon-text">
+              <i class="fas fa-map-marker-alt"></i> 지도 보기
+            </a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- 5. 장비 등록 -->
-  <div class="card">
-    <h2><span class="emoji">💻</span>반입 장비 정보</h2>
-    <p>❗️ 무선랜 게스트망 연결을 위해 MAC 주소 정보가 필수입니다.<br>
-    노트북의 MAC 주소는 cmd 창에서 'ipconfig /all'로 확인 가능합니다.</p>
-    <p>🔔 방문 출입 시 LAN Port 모두 봉인됩니다. 해제 필요 시 체크해주세요.</p>
-    <p><input type="checkbox" id="usb"><label for="usb"> USB 등 저장매체 반입이 필요한 경우 작성</label></p>
-    <div id="usb-detail" style="display:none;margin:8px 0;">
-      <textarea placeholder="저장매체 종류 및 개수, 반입 사유" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:4px;" rows="2"></textarea>
-    </div>
-    <p><input type="checkbox" id="lan"><label for="lan"> LAN Port 해제가 필요한 경우 작성</label></p>
-    <div id="lan-detail" style="display:none;margin:8px 0;">
-      <select style="width:48%;padding:8px;border:1px solid #ccc;border-radius:4px;">
-        <option>USB</option><option>LAN</option><option>SD카드</option>
-        <option>카메라</option><option>기타</option>
-      </select>
-      <input type="text" placeholder="LAN Port 해제 사유" style="width:48%;padding:8px;border:1px solid #ccc;border-radius:4px;margin-left:4%;">
-    </div>
-    <table>
-      <thead>
-        <tr>
-          <th>장비명 *</th>
-          <th>제조사</th>
-          <th>수량</th>
-          <th>S/N</th>
-          <th>MAC주소</th>
-        </tr>
-      </thead>
-      <tbody id="eq-rows">
-        <tr>
-          <td>
-            <select style="width:100%;padding:6px;border:1px solid #ccc;border-radius:4px;">
-              <option>선택</option><option>노트북</option><option>네트워크장비</option>
-              <option>NAS</option><option>데스크탑</option><option>스마트패드</option>
-              <option>샘플폰</option><option>서버장비</option><option>태블릿PC</option>
-              <option>AP</option><option>CD</option><option>디지털카메라</option>
-              <option>DVD</option><option>HDD/SSD</option><option>모바일폰</option>
-              <option>메모리카드</option><option>USB</option><option>워크스테이션</option><option>기타</option>
+    <!-- 3. 출입 안내 -->
+    <div class="card">
+      <h2><i class="fas fa-sign-in-alt"></i> 출입 안내</h2>
+
+      <div class="important-note">
+        <p class="flex items-start">
+          <i class="fas fa-exclamation-triangle text-yellow-600 mr-2 mt-1"></i>
+          <span><a href="https://visit.lg.com/" target="_blank" class="text-blue-600 hover:underline">방문 포털 접속</a>하여 비회원 방문 예약으로 진행해 주세요.</span>
+        </p>
+      </div>
+
+      <div class="important-note mt-4">
+        <p class="flex items-start">
+          <i class="fas fa-info-circle text-blue-600 mr-2 mt-1"></i>
+          <span>노트북 등 기타 전자기기는 반입물품 정보에 필수 입력하셔야 합니다. (봉인 예외여부 체크 X)</span>
+        </p>
+      </div>
+
+      <div class="space-y-4 mt-4">
+        <div class="bg-gray-50 rounded-lg p-3 flex items-start">
+          <div class="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3">1</div>
+          <div><strong>LG 방문신청 서비스 약관:</strong> 모두 동의</div>
+        </div>
+        <div class="bg-gray-50 rounded-lg p-3 flex items-start">
+          <div class="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3">2</div>
+          <div><strong>방문장소:</strong> LG전자 마곡</div>
+        </div>
+        <div class="bg-gray-50 rounded-lg p-3 flex items-start">
+          <div class="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3">3</div>
+          <div class="w-full">
+            <strong>방문자:</strong>
+            <select class="form-control mt-2">
+              <option>운영자 정보 참고</option>
+              <option>김미진 (9698)</option>
+              <option>선송이 (7020)</option>
+              <option>유지혜 (0530)</option>
+              <option>정하연 (6894)</option>
             </select>
-          </td>
-          <td><input type="text" style="width:100%;padding:6px;border:1px solid #ccc;border-radius:4px;"></td>
-          <td><input type="number" style="width:100%;padding:6px;border:1px solid #ccc;border-radius:4px;" value="1" min="1"></td>
-          <td><input type="text" style="width:100%;padding:6px;border:1px solid #ccc;border-radius:4px;"></td>
-          <td><input type="text" style="width:100%;padding:6px;border:1px solid #ccc;border-radius:4px;"></td>
-        </tr>
-      </tbody>
-    </table>
-    <button class="btn" onclick="addEq()">장비 추가</button>
-  </div>
+          </div>
+        </div>
+        <div class="bg-gray-50 rounded-lg p-3 flex items-start">
+          <div class="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3">4</div>
+          <div><strong>방문날짜:</strong> 방문 포털에서 방문 기간으로 설정해 주세요.</div>
+        </div>
+      </div>
+    </div>
 
-  <!-- 6. FAQ -->
-  <div class="card">
-    <h2><span class="emoji">❓</span>자주 묻는 질문(FAQ)</h2>
-    <div id="faq">
+    <!-- 4. 강사 정보 -->
+    <div class="card">
+      <h2><i class="fas fa-user-tie"></i> 강사 정보</h2>
+      <div class="form-group"><label>업체명</label><input type="text" class="form-control" placeholder="예: LG전자"></div>
+      <div class="form-group"><label>성함</label><input type="text" class="form-control" placeholder="예: 김엘지"></div>
+      <div class="form-group"><label>연락처</label><input type="tel" class="form-control" placeholder="예: 010-1234-5678"></div>
+      <h3 class="icon-text mt-4"><i class="fas fa-car text-blue-600"></i> 차량 정보 (주차 시)</h3>
+      <div id="vehicle-container" class="space-y-3">
+        <div class="flex flex-wrap gap-3 items-center">
+          <input type="checkbox" id="no-vehicle"><label for="no-vehicle">해당 사항 없음</label>
+        </div>
+        <div class="vehicle-info-row flex flex-wrap gap-3">
+          <input type="text" class="form-control flex-1 min-w-[200px]" placeholder="차종 (예: 아반떼)">
+          <input type="text" class="form-control flex-1 min-w-[200px]" placeholder="차량번호 (예: 12가 3456)">
+          <button type="button" class="btn btn-secondary delete-vehicle-btn"><i class="fas fa-trash-alt"></i></button>
+        </div>
+        <button type="button" id="add-vehicle-btn" class="add-equipment-btn"><i class="fas fa-plus-circle"></i> 차량 추가</button>
+      </div>
+    </div>
+
+    <!-- 5. 반입 장비 정보 -->
+    <div class="card">
+      <h2><i class="fas fa-laptop"></i> 반입 장비 정보</h2>
+      <div class="important-note mb-4">
+        <p class="flex items-start"><i class="fas fa-wifi text-blue-600 mr-2 mt-1"></i> 무선랜 게스트망 연결을 위해 MAC 주소 정보가 필수입니다.</p>
+        <p class="ml-6 text-sm">노트북의 MAC 주소는 cmd 창에서 'ipconfig /all'로 확인 가능합니다.</p>
+      </div>
+      <div class="important-note mb-4">
+        <p class="flex items-start"><i class="fas fa-hdd text-orange-600 mr-2 mt-1"></i> 외장하드 등 저장매체는 원칙상 반입이 불가합니다, 필요 시 아래 기입해주세요.</p>
+      </div>
+
+      <table class="equipment-table">
+        <thead>
+          <tr>
+            <th>장비구분 *</th><th>제조사</th><th>기종</th><th style="width:60px">수량</th><th>S/N & MAC주소</th><th></th>
+          </tr>
+        </thead>
+        <tbody id="equipment-tbody">
+          <tr>
+            <td><select class="form-control">
+              <option>선택</option><option>노트북</option><option>네트워크장비</option><option>NAS</option>
+              <option>데스크탑</option><option>스마트패드</option><option>샘플폰</option><option>서버장비</option>
+              <option>태블릿PC</option><option>AP</option><option>CD</option><option>디지털카메라</option>
+              <option>DVD</option><option>기타</option><option>HDD/SSD</option><option>모바일폰</option>
+              <option>메모리카드</option><option>USB</option><option>워크스테이션</option>
+            </select></td>
+            <td><input type="text" class="form-control"></td>
+            <td><input type="text" class="form-control"></td>
+            <td><input type="number" class="form-control" min="1" value="1"></td>
+            <td><input type="text" class="form-control"></td>
+            <td><button class="btn btn-secondary delete-equipment-btn"><i class="fas fa-trash-alt"></i></button></td>
+          </tr>
+        </tbody>
+      </table>
+      <button id="add-equipment-btn" class="add-equipment-btn"><i class="fas fa-plus-circle"></i> 장비 추가</button>
+
+      <div class="mt-4">
+        <div class="checkbox-group">
+          <input type="checkbox" id="usb-needed"><label for="usb-needed">USB 등 저장매체 반입이 필요한 경우 작성</label>
+        </div>
+        <div id="usb-details" class="hidden mt-2">
+          <textarea class="form-control" rows="3" placeholder="저장매체 종류 및 개수, 반입 사유 작성해주세요."></textarea>
+        </div>
+
+        <div class="checkbox-group mt-3">
+          <input type="checkbox" id="lan-needed"><label for="lan-needed">LAN Port 해제가 필요한 경우 작성</label>
+        </div>
+        <div id="lan-details" class="hidden flex gap-3 mt-2">
+          <select class="form-control w-1/2">
+            <option>USB</option><option>LAN</option><option>SD카드</option><option>카메라</option><option>기타</option>
+          </select>
+          <input type="text" class="form-control w-1/2" placeholder="LAN Port 해제 사유를 작성해 주세요.">
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. 기타 요청사항 -->
+    <div class="card">
+      <h2><i class="fas fa-comment-alt"></i> 기타 요청사항</h2>
+      <textarea class="form-control" rows="5" placeholder="추가 요청사항이 있으시면 작성해주세요."></textarea>
+    </div>
+
+    <!-- 7. FAQ -->
+    <div class="card">
+      <h2><i class="fas fa-question-circle"></i> 자주 묻는 질문(FAQ)</h2>
       <div class="faq-item">
-        <div class="faq-question">Q1. 노트북 외에도 태블릿도 MAC 등록이 필요한가요?<span class="faq-toggle">▼</span></div>
+        <div class="faq-question"><span>Q1. 노트북 외에도 태블릿도 MAC 등록이 필요한가요?</span><span class="faq-toggle">▼</span></div>
         <div class="faq-answer"><p>네, 무선 연결이 필요한 장비는 모두 등록해 주셔야 합니다.</p></div>
       </div>
       <div class="faq-item">
-        <div class="faq-question">Q2. 입차 등록은 필수인가요?<span class="faq-toggle">▼</span></div>
+        <div class="faq-question"><span>Q2. 입차 등록은 필수인가요?</span><span class="faq-toggle">▼</span></div>
         <div class="faq-answer"><p>네. 사전 등록되지 않으면 출입이 불가합니다.</p></div>
       </div>
       <div class="faq-item">
-        <div class="faq-question">Q3. 장비 반입 목록은 언제까지 제출해야 하나요?<span class="faq-toggle">▼</span></div>
+        <div class="faq-question"><span>Q3. 장비 반입 목록은 언제까지 제출해야 하나요?</span><span class="faq-toggle">▼</span></div>
         <div class="faq-answer"><p>최소 방문 3영업일 전까지 제출해 주시기 바랍니다.</p></div>
       </div>
       <div class="faq-item">
-        <div class="faq-question">Q4. 방문증을 수령한 안내데스크에 반납해주세요. 예) W10동에서 수령 → W10동 안내데스크 반납<span class="faq-toggle">▼</span></div>
+        <div class="faq-question"><span>Q4. 방문증을 수령한 안내데스크에 반납해주세요. 예) W10동에서 수령 → W10동 안내데스크 반납</span><span class="faq-toggle">▼</span></div>
         <div class="faq-answer"><p>방문증은 받은 안내데스크에 반드시 반납해 주세요.</p></div>
       </div>
     </div>
   </div>
 
-  <!-- Floating Link Button -->
-  <button class="btn" id="gen" style="position:fixed;right:24px;bottom:24px;">🔗 링크 생성</button>
+  <!-- 링크 생성 버튼 -->
+  <button id="create-link-btn" class="btn btn-primary floating-btn">
+    <i class="fas fa-link"></i> 링크 생성
+  </button>
 
-  <!-- Modal -->
-  <div id="modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;
-       background:rgba(0,0,0,0.5);justify-content:center;align-items:center;">
-    <div style="background:#fff;padding:24px;border-radius:8px;max-width:500px;width:90%;">
-      <p>생성된 링크를 복사하여 운영자에게 메일로 회신 부탁드립니다 😊</p>
-      <textarea id="link" style="width:100%;height:80px;"></textarea>
-      <button class="btn" onclick="copyLink()">복사</button>
-      <button class="btn" style="background:#ccc;margin-left:8px;" onclick="closeModal()">닫기</button>
+  <!-- 모달 -->
+  <div id="link-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h3 class="text-xl font-semibold mb-4">공유 링크가 생성되었습니다</h3>
+      <p class="mb-3">아래 링크를 복사하여 운영자에게 메일로 전달해주세요 😊</p>
+      <textarea id="share-link" class="form-control mb-3" rows="4" readonly></textarea>
+      <button id="copy-link-btn" class="btn btn-primary w-full">
+        <i class="fas fa-copy"></i> 링크 복사
+      </button>
     </div>
   </div>
 
   <script>
-    // FAQ toggle
+    // 파일명 표시
+    document.getElementById('program-file').addEventListener('change', e=>{
+      document.getElementById('program-file-name').textContent = e.target.files[0]?.name||'선택된 파일 없음';
+    });
+    document.getElementById('pdf-file').addEventListener('change', e=>{
+      document.getElementById('pdf-file-name').textContent = e.target.files[0]?.name||'선택된 파일 없음';
+    });
+    // 토글 섹션
+    ;['pdf-material','printed-material'].forEach(id=>{
+      document.getElementById(id).addEventListener('change', e=>{
+        document.getElementById(id==='pdf-material'?'pdf-material-file':'printed-material-info')
+          .classList.toggle('hidden', !e.target.checked);
+      });
+    });
+    // 지원 상세
+    ;['laptop-needed','monitor-needed'].forEach(id=>{
+      document.getElementById(id).addEventListener('change', ()=>{
+        const show = document.getElementById('laptop-needed').checked || document.getElementById('monitor-needed').checked;
+        document.getElementById('support-details')?.classList.toggle('hidden', !show);
+      });
+    });
+    // USB / LAN 토글
+    document.getElementById('usb-needed').addEventListener('change', e=>{
+      document.getElementById('usb-details').classList.toggle('hidden', !e.target.checked);
+    });
+    document.getElementById('lan-needed').addEventListener('change', e=>{
+      document.getElementById('lan-details').classList.toggle('hidden', !e.target.checked);
+    });
+    // 차량 추가/삭제
+    document.getElementById('add-vehicle-btn').addEventListener('click', ()=>{
+      const container = document.getElementById('vehicle-container');
+      const row = container.querySelector('.vehicle-info-row').cloneNode(true);
+      row.querySelectorAll('input').forEach(i=>i.value='');
+      container.insertBefore(row, document.getElementById('add-vehicle-btn'));
+      attachDelete(document.querySelectorAll('.delete-vehicle-btn'));
+    });
+    function attachDelete(btns){
+      btns.forEach(btn=>{
+        btn.onclick=()=>{ if(document.querySelectorAll('.vehicle-info-row').length>1) btn.closest('.vehicle-info-row').remove(); };
+      });
+    }
+    attachDelete(document.querySelectorAll('.delete-vehicle-btn'));
+    // 장비 추가/삭제
+    document.getElementById('add-equipment-btn').addEventListener('click', ()=>{
+      const tbody = document.getElementById('equipment-tbody');
+      const tr = tbody.querySelector('tr').cloneNode(true);
+      tr.querySelectorAll('input,select').forEach(i=>i.value='');
+      tbody.appendChild(tr);
+      attachDelEq(document.querySelectorAll('.delete-equipment-btn'));
+    });
+    function attachDelEq(btns){
+      btns.forEach(btn=>{
+        btn.onclick=()=>{ if(document.querySelectorAll('#equipment-tbody tr').length>1) btn.closest('tr').remove(); };
+      });
+    }
+    attachDelEq(document.querySelectorAll('.delete-equipment-btn'));
+    // FAQ 아코디언
     document.querySelectorAll('.faq-question').forEach(q=>{
-      q.onclick=()=>{
-        const item=q.parentElement;
+      q.onclick=()=>{ 
+        const item=q.parentNode;
         item.classList.toggle('active');
       };
     });
-    // Show printed-material info
-    document.getElementById('printed').onchange=e=>{
-      document.getElementById('printed-info').style.display = e.target.checked ? 'block':'none';
+    // 링크 생성 모달
+    const modal=document.getElementById('link-modal'),
+          share=document.getElementById('share-link'),
+          btn=createLinkBtn=document.getElementById('create-link-btn'),
+          cp=document.getElementById('copy-link-btn'),
+          close=document.querySelector('.close-modal');
+    btn.onclick=()=>{
+      // 실제 데이터 인코딩 로직 필요 시 여기에
+      share.value = location.href + '?data=' + encodeURIComponent(JSON.stringify({
+        comp: document.querySelector('#company-name')?.value||'',
+        name: document.querySelector('#instructor-name')?.value||'',
+        phone: document.querySelector('#phone-number')?.value||''
+      }));
+      modal.style.display='flex';
     };
-    // USB & LAN toggle details
-    document.getElementById('usb').onchange=e=>{
-      document.getElementById('usb-detail').style.display = e.target.checked ? 'block':'none';
+    close.onclick=()=>modal.style.display='none';
+    window.onclick=e=>{ if(e.target===modal) modal.style.display='none'; };
+    cp.onclick=()=>{
+      share.select(); document.execCommand('copy');
+      cp.innerHTML='<i class="fas fa-check-circle"></i> 복사 완료!';
+      setTimeout(()=>cp.innerHTML='<i class="fas fa-copy"></i> 링크 복사',2000);
     };
-    document.getElementById('lan').onchange=e=>{
-      document.getElementById('lan-detail').style.display = e.target.checked ? 'flex':'none';
-    };
-    // Add equipment row
-    function addEq(){
-      const tbody=document.getElementById('eq-rows');
-      const tr=tbody.rows[0].cloneNode(true);
-      tr.querySelectorAll('input,select').forEach(i=>i.value='');
-      tbody.appendChild(tr);
-    }
-    // Link modal
-    document.getElementById('gen').onclick=()=>{
-      document.getElementById('modal').style.display='flex';
-      document.getElementById('link').value=location.href+'?data='+encodeURIComponent(Date.now());
-    };
-    function copyLink(){
-      const ta=document.getElementById('link');
-      ta.select(); document.execCommand('copy');
-      alert('복사 완료!');
-    }
-    function closeModal(){ document.getElementById('modal').style.display='none'; }
   </script>
-
 </body>
 </html>
