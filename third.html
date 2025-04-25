@@ -1,98 +1,35 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LG전자 마곡 강의안내</title>
-  <style>
-    :root {
-      --primary: #7c3aed;
-      --secondary: #3b82f6;
-      --text: #f9fafb;
-      --bg: #0f172a;
-    }
+<!-- 인트로 섹션 -->
+<section class="bg-white rounded-xl shadow-lg p-6 mb-6" data-aos="fade-up">
+  <h2 class="text-2xl font-bold text-red-700 flex items-center mb-2">
+    <i class="fas fa-school mr-2 text-red-500"></i> LG 마곡 강의 방문 안내
+  </h2>
+  <p class="text-gray-700">외부 강사 및 방문자를 위한 필수 정보를 확인하세요. 강의 장소, 출입 절차, 주차 정보까지 한눈에 확인 가능합니다.</p>
+</section>
 
-    body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Pretendard', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-    }
+<!-- 오시는 길 -->
+<section class="bg-white rounded-xl shadow-lg p-6 mb-6" data-aos="fade-up">
+  <h2 class="text-2xl font-bold text-red-700 flex items-center mb-2">
+    <i class="fas fa-map-marker-alt mr-2 text-red-500"></i> 오시는 길
+  </h2>
+  <p class="text-gray-800 mb-3"><strong>주소:</strong> 서울특별시 강서구 마곡중앙로 10로 10, LG사이언스파크 W10동</p>
+  <ul class="list-disc list-inside text-gray-700 mb-4">
+    <li><strong>지하철:</strong> 마곡나루역 3번 출구에서 도보 10분</li>
+    <li><strong>자가용:</strong> "LG사이언스파크" 네이버 지도 검색 → 정문 진입</li>
+  </ul>
+  <a href="https://map.naver.com/..." target="_blank" class="btn btn-secondary">
+    <i class="fas fa-map"></i> 지도에서 보기
+  </a>
+</section>
 
-    h1 {
-      font-size: 2.75rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-    }
-
-    p {
-      font-size: 1.25rem;
-      color: #94a3b8;
-      margin-bottom: 2.5rem;
-    }
-
-    .button-row {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .btn {
-      padding: 1rem 2rem;
-      font-size: 1.125rem;
-      font-weight: 600;
-      border: none;
-      border-radius: 9999px;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
-    }
-
-    .btn-approve {
-      background-color: var(--primary);
-      color: white;
-    }
-
-    .btn-guide {
-      background-color: var(--secondary);
-      color: white;
-    }
-
-    @media(max-width: 480px) {
-      h1 {
-        font-size: 2rem;
-      }
-
-      .btn {
-        font-size: 1rem;
-        width: 100%;
-        justify-content: center;
-      }
-    }
-  </style>
-</head>
-<body>
-  <h1>LG전자 마곡 사이언스파크</h1>
-  <p>강의 안내 페이지에 오신 것을 환영합니다</p>
-  <div class="button-row">
-    <a href="approve.html" class="btn btn-approve">📚 인정신청</a>
-    <a href="guide.html" class="btn btn-guide">🚗 방문안내</a>
-  </div>
-</body>
-</html>
+<!-- 출입 절차 -->
+<section class="bg-white rounded-xl shadow-lg p-6 mb-6" data-aos="fade-up">
+  <h2 class="text-2xl font-bold text-red-700 flex items-center mb-2">
+    <i class="fas fa-door-open mr-2 text-red-500"></i> 출입 절차
+  </h2>
+  <ol class="list-decimal pl-5 space-y-2 text-gray-800">
+    <li>LG전자 방문 포털(visit.lg.com)에서 <span class="font-semibold text-red-600">비회원 방문 예약</span>을 진행합니다.</li>
+    <li>약관 동의 후, 방문장소를 <strong>"LG전자 마곡"</strong>으로 설정합니다.</li>
+    <li>전자기기 반입 시, 반드시 반입물품 정보에 <strong>기기명 + MAC 주소</strong>를 입력합니다.</li>
+    <li>출입 당일, 방문증을 안내데스크에서 수령합니다.</li>
+  </ol>
+</section>
