@@ -270,25 +270,77 @@
   </div>
 </div>
 
-    <!-- 4. 강사 정보 -->
-    <div class="card">
-      <h2><i class="fas fa-user-tie"></i> 강사 정보</h2>
-      <div class="form-group"><label>업체명</label><input type="text" class="form-control" placeholder="예: LG전자"></div>
-      <div class="form-group"><label>성함</label><input type="text" class="form-control" placeholder="예: 김엘지"></div>
-      <div class="form-group"><label>연락처</label><input type="tel" class="form-control" placeholder="예: 010-1234-5678"></div>
-      <h3 class="icon-text mt-4"><i class="fas fa-car text-blue-600"></i> 차량 정보 (주차 시)</h3>
-      <div id="vehicle-container" class="space-y-3">
-        <div class="flex flex-wrap gap-3 items-center">
-          <input type="checkbox" id="no-vehicle"><label for="no-vehicle">해당 사항 없음</label>
-        </div>
-        <div class="vehicle-info-row flex flex-wrap gap-3">
-          <input type="text" class="form-control flex-1 min-w-[200px]" placeholder="차종 (예: 아반떼)">
-          <input type="text" class="form-control flex-1 min-w-[200px]" placeholder="차량번호 (예: 12가 3456)">
-          <button type="button" class="btn btn-secondary delete-vehicle-btn"><i class="fas fa-trash-alt"></i></button>
-        </div>
-        <button type="button" id="add-vehicle-btn" class="add-equipment-btn"><i class="fas fa-plus-circle"></i> 차량 추가</button>
+<!-- 4. 강사 정보 -->
+<div class="card">
+  <h2><i class="fas fa-user-tie text-red-600 mr-2"></i>강사 정보</h2>
+
+  <!-- 업체명 (full width) -->
+  <div class="form-group">
+    <label for="company-name">업체명</label>
+    <input
+      type="text"
+      id="company-name"
+      class="form-control"
+      placeholder="예: LG전자"
+      style="padding:0.5rem;"
+    />
+  </div>
+
+  <!-- 성함 & 연락처를 한 줄에 -->
+  <div class="form-group">
+    <div class="flex flex-wrap gap-3">
+      <div class="flex-1">
+        <label for="instructor-name">성함</label>
+        <input
+          type="text"
+          id="instructor-name"
+          class="form-control"
+          placeholder="예: 김엘지"
+          style="padding:0.5rem;"
+        />
+      </div>
+      <div class="flex-1">
+        <label for="phone-number">연락처</label>
+        <input
+          type="tel"
+          id="phone-number"
+          class="form-control"
+          placeholder="예: 010-1234-5678"
+          style="padding:0.5rem;"
+        />
       </div>
     </div>
+  </div>
+
+  <!-- 차량 정보 -->
+  <h3 class="icon-text mt-4"><i class="fas fa-car text-blue-600 mr-2"></i>차량 정보 (주차 시)</h3>
+  <div id="vehicle-container" class="space-y-3">
+    <div class="flex items-center gap-2">
+      <input type="checkbox" id="no-vehicle"/>
+      <label for="no-vehicle">해당 사항 없음</label>
+    </div>
+    <div class="vehicle-info-row flex flex-wrap gap-3 items-center">
+      <input
+        type="text"
+        class="form-control flex-1 min-w-[200px]"
+        placeholder="차종 (예: 아반떼)"
+        style="padding:0.5rem;"
+      />
+      <input
+        type="text"
+        class="form-control flex-1 min-w-[200px]"
+        placeholder="차량번호 (예: 12가 3456)"
+        style="padding:0.5rem;"
+      />
+      <button type="button" class="btn btn-secondary delete-vehicle-btn">
+        <i class="fas fa-trash-alt"></i>
+      </button>
+    </div>
+    <button type="button" id="add-vehicle-btn" class="add-equipment-btn">
+      <i class="fas fa-plus-circle"></i> 차량 추가
+    </button>
+  </div>
+</div>
 
     <!-- 5. 반입 장비 정보 -->
     <div class="card">
