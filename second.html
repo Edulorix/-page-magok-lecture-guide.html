@@ -1,98 +1,706 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LG Science Park 방문 안내</title>
-  <style>
-    /* 기본 스타일 */
-    body { font-family: 'Pretendard', 'Noto Sans KR', sans-serif; background: #f9f9f9; color: #333; margin: 0; padding: 0; }
-    h1 { font-size: 48px; font-weight: bold; text-align: center; margin: 40px 0 20px; }
-    p { text-align: center; font-size: 18px; color: #666; margin-bottom: 40px; }
-    .container { width: 90%; max-width: 800px; margin: auto; }
-    .section { background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-    label { display: block; margin-bottom: 8px; font-weight: bold; }
-    input, textarea, select { width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; }
-    button { background: #3b82f6; color: white; border: none; padding: 12px 24px; border-radius: 9999px; font-size: 18px; cursor: pointer; transition: background 0.3s; }
-    button:hover { background: #5aa0ff; }
-    .flex { display: flex; align-items: center; gap: 10px; }
-    .wave-effect { position: relative; overflow: hidden; }
-    .wave-effect::after { content: ""; position: absolute; background: rgba(255,255,255,0.5); border-radius: 50%; transform: scale(0); animation: ripple 0.6s linear; }
-    @keyframes ripple { to { transform: scale(4); opacity: 0; } }
-  </style>
-</head>
+/* Reset & Base Styles */
+:root {
+    --primary-color: #a50034;
+    --primary-hover: #c1355d;
+    --secondary-color: #3b82f6;
+    --secondary-hover: #60a5fa;
+    --text-dark: #333333;
+    --text-light: #f9f9f9;
+    --bg-light: #f9f9f9;
+    --bg-dark: #1a1a1a;
+    --card-light: #ffffff;
+    --card-dark: #2a2a2a;
+    --border-light: #e0e0e0;
+    --border-dark: #444444;
+    --shadow-light: 0 8px 30px rgba(0, 0, 0, 0.08);
+    --shadow-dark: 0 8px 30px rgba(0, 0, 0, 0.3);
+    --transition: all 0.3s ease;
+    --radius: 12px;
+}
 
-<body>
-  <h1>LG Science Park 방문 안내</h1>
-  <p>강사님을 위한 안내 페이지입니다.</p>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-  <div class="container">
-    <div class="section">
-      <h2>강사 정보 입력</h2>
-      <label>이름</label>
-      <input type="text" id="name" placeholder="이름 입력">
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    transition: var(--transition);
+    overflow-x: hidden;
+    position: relative;
+}
 
-      <label>소속</label>
-      <input type="text" id="company" placeholder="소속 입력">
+body.dark-mode {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+}
 
-      <label>연락처</label>
-      <input type="text" id="phone" placeholder="연락처 입력">
-    </div>
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: var(--transition);
+}
 
-    <div class="section">
-      <h2>반입 장비 리스트</h2>
-      <div id="equipment-list"></div>
-      <button onclick="addEquipment()">장비 추가 ➕</button>
-    </div>
+a:hover {
+    color: var(--primary-hover);
+}
 
-    <div class="section">
-      <h2>기타 요청사항</h2>
-      <textarea id="requests" rows="4" placeholder="추가 요청사항 입력"></textarea>
-    </div>
+/* Header Styles */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    z-index: 100;
+    background-color: rgba(249, 249, 249, 0.8);
+    backdrop-filter: blur(10px);
+    transition: var(--transition);
+}
 
-    <div class="section flex">
-      <button onclick="generateLink()" class="wave-effect">링크 생성하기</button>
-      <button onclick="copyLink()" class="wave-effect">링크 복사하기</button>
-    </div>
+.dark-mode header {
+    background-color: rgba(26, 26, 26, 0.8);
+}
 
-    <div class="section">
-      <h2>생성된 링크</h2>
-      <input type="text" id="generated-link" readonly>
-    </div>
-  </div>
+/* Theme Toggle */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
 
-  <script>
-    // 장비 리스트 추가 함수
-    function addEquipment() {
-      const list = document.getElementById('equipment-list');
-      const div = document.createElement('div');
-      div.className = 'flex';
-      div.innerHTML = `
-        <input type="text" placeholder="장비명">
-        <input type="text" placeholder="제조사">
-        <input type="text" placeholder="MAC 주소">
-        <button onclick="this.parentElement.remove()">🗑️ 삭제</button>
-      `;
-      list.appendChild(div);
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: var(--transition);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: var(--transition);
+}
+
+.switch input:checked + .slider {
+    background-color: var(--secondary-color);
+}
+
+.switch input:checked + .slider:before {
+    transform: translateX(22px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Button Styles */
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.primary-button {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.primary-button:hover {
+    background-color: var(--primary-hover);
+}
+
+.secondary-button {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.secondary-button:hover {
+    background-color: var(--secondary-hover);
+}
+
+.outline-button {
+    background-color: transparent;
+    border: 1px solid var(--border-light);
+    color: var(--text-dark);
+}
+
+.dark-mode .outline-button {
+    border-color: var(--border-dark);
+    color: var(--text-light);
+}
+
+.outline-button:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode .outline-button:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-dark);
+    transition: var(--transition);
+}
+
+.dark-mode .icon-button {
+    color: var(--text-light);
+}
+
+.icon-button:hover {
+    color: var(--primary-color);
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Cursor Trail Effect */
+.cursor-trail {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgba(165, 0, 52, 0.3);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    transition: width 0.1s, height 0.1s;
+}
+
+/* Main Content Styles */
+main {
+    padding-top: 80px;
+    min-height: calc(100vh - 60px); /* Account for footer */
+}
+
+.hero {
+    text-align: center;
+    padding: 4rem 1rem;
+    margin-bottom: 2rem;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.dark-mode .subtitle {
+    color: #aaa;
+}
+
+.card-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.card {
+    background-color: var(--card-light);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
+}
+
+.dark-mode .card {
+    background-color: var(--card-dark);
+    box-shadow: var(--shadow-dark);
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: var(--transition);
+    background-color: var(--card-light);
+    color: var(--text-dark);
+}
+
+.dark-mode input, 
+.dark-mode textarea, 
+.dark-mode select {
+    border-color: var(--border-dark);
+    background-color: var(--card-dark);
+    color: var(--text-light);
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(165, 0, 52, 0.2);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Equipment Table Styles */
+.equipment-table-container {
+    overflow-x: auto;
+    margin-bottom: 1rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.dark-mode th, 
+.dark-mode td {
+    border-bottom-color: var(--border-dark);
+}
+
+th {
+    font-weight: 500;
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.dark-mode th {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.equipment-row td {
+    padding: 0.3rem;
+}
+
+.equipment-row input {
+    border: none;
+    padding: 0.5rem;
+    box-shadow: none;
+}
+
+.equipment-row input:focus {
+    border: 1px solid var(--primary-color);
+}
+
+/* Link Preview Styles */
+.link-preview-container {
+    margin-top: 1.5rem;
+    transition: var(--transition);
+}
+
+.link-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.link-preview textarea {
+    min-height: 60px;
+    font-family: monospace;
+    font-size: 0.9rem;
+    padding: 1rem;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Accordion Styles */
+.accordion-item {
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.dark-mode .accordion-item {
+    border-color: var(--border-dark);
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.02);
+    transition: var(--transition);
+}
+
+.dark-mode .accordion-header {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.accordion-header:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode .accordion-header:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.accordion-item h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.accordion-icon {
+    transition: var(--transition);
+}
+
+.accordion-item.active .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.accordion-item.active .accordion-content {
+    padding: 1rem;
+    max-height: 500px;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: var(--card-light);
+    border-radius: var(--radius);
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-light);
+}
+
+.map-modal-content {
+    max-width: 800px;
+}
+
+.dark-mode .modal-content {
+    background-color: var(--card-dark);
+    box-shadow: var(--shadow-dark);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.dark-mode .modal-header {
+    border-bottom-color: var(--border-dark);
+}
+
+.close-modal {
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: var(--transition);
+}
+
+.close-modal:hover {
+    color: var(--primary-color);
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Map Styles */
+.map-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.map-image {
+    width: 100%;
+    border-radius: var(--radius);
+}
+
+.map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+}
+
+.entrance {
+    background-color: #4CAF50;
+}
+
+.parking {
+    background-color: #2196F3;
+}
+
+.classroom {
+    background-color: #FF9800;
+}
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background-color: #333;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: var(--transition);
+    z-index: 1000;
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* Notification Banner */
+.notification-banner {
+    position: fixed;
+    top: -100px;
+    left: 0;
+    width: 100%;
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 0.75rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transition);
+    z-index: 90;
+}
+
+.notification-banner.show {
+    top: 60px;
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.close-notification {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.dark-mode footer {
+    color: #aaa;
+}
+
+/* Utility Classes */
+.material-symbols-rounded {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
+    vertical-align: middle;
+}
+
+/* Wave Effect */
+.wave-effect {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.7);
+    transform: scale(0);
+    animation: ripple 0.8s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    .card {
+        padding: 1.5rem;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .notification-banner.show {
+        top: 50px;
+    }
+    
+    header {
+        padding: 0.75rem 1rem;
     }
 
-    // 링크 생성 함수
-    function generateLink() {
-      const name = document.getElementById('name').value;
-      const company = document.getElementById('company').value;
-      const phone = document.getElementById('phone').value;
-      const requests = document.getElementById('requests').value;
-      let link = `${location.origin}${location.pathname}?name=${encodeURIComponent(name)}&company=${encodeURIComponent(company)}&phone=${encodeURIComponent(phone)}&requests=${encodeURIComponent(requests)}`;
-      document.getElementById('generated-link').value = link;
+    .theme-toggle .material-symbols-rounded {
+        font-size: 20px;
     }
+}
 
-    // 링크 복사 함수
-    function copyLink() {
-      const link = document.getElementById('generated-link');
-      link.select();
-      document.execCommand('copy');
-      alert('링크가 복사되었습니다!');
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
     }
-  </script>
-</body>
-</html>
+    
+    .modal-content {
+        width: 95%;
+    }
+    
+    .button {
+        width: 100%;
+    }
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background-color: white;
+        color: black;
+    }
