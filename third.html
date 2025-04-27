@@ -1,103 +1,884 @@
+요청하신 대로 모든 조건을 만족하는 최고 퀄리티의 HTML+CSS+JS 코드를 생성하겠습니다. 세계 최고의 웹 디자이너 + 프론트엔드 엔지니어로서 모든 요구사항을 충족하는 완성도 높은 단일 HTML 파일을 제공합니다.
+
+```html
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LG전자 마곡 강의 안내</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="LG전자 마곡 사이언스파크 강의 안내 - 외부 강사를 위한 방문 정보 및 준비사항 안내">
+  <meta property="og:title" content="LG전자 마곡 사이언스파크 강의 안내">
+  <meta property="og:description" content="외부 강사를 위한 방문 정보, 출입 절차, 장비 반입 안내">
+  <meta property="og:image" content="https://www.lgsciencepark.com/upload/community/20210303162731-a8b0c22dd3e59fdc6249a3ad30eb3cd8.jpg">
+  <title>LG전자 마곡 사이언스파크 강의 안내</title>
+  
+  <!-- TailwindCSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- FontAwesome CDN -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- Google Fonts - Noto Sans KR -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <!-- AOS (Animate On Scroll) -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <!-- QRCode.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
   <style>
     :root {
-      --purple: #7c3aed;
-      --blue: #3b82f6;
-      --text: #f1f5f9;
-      --bg: #0f172a;
+      --lg-red: #a50034;
+      --lg-dark-red: #8a0029;
+      --lg-light-red: #ff5f6d;
+      --lg-gray: #58595b;
+      --lg-light-gray: #f5f5f7;
+      --lg-dark: #333333;
+      --duration: 0.3s;
+      --card-radius: 12px;
+      --btn-radius: 8px;
+      --lg-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      --lg-shadow-strong: 0 10px 25px rgba(0, 0, 0, 0.1);
     }
 
+    /* Base Styles */
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: var(--lg-light-gray);
+      color: var(--lg-dark);
+      line-height: 1.6;
+      transition: background-color var(--duration), color var(--duration);
+      overflow-x: hidden;
+      min-height: 100vh;
+      padding-bottom: 100px;
+    }
+
+    body.dark-mode {
+      background-color: #121212;
+      color: #f8f9fa;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(to right, var(--lg-red), var(--lg-light-red));
+      border-radius: 2px;
+    }
+
+    body.dark-mode h2::after {
+      background: linear-gradient(to right, var(--lg-red), var(--lg-light-red));
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Cards */
+    .card {
+      background-color: white;
+      border-radius: var(--card-radius);
+      box-shadow: var(--lg-shadow);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      transition: transform 0.3s, box-shadow 0.3s, background-color var(--duration);
+      overflow: hidden;
+    }
+
+    body.dark-mode .card {
+      background-color: #1e1e1e;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .card:hover {
+      transform: translateY(-5px) scale(1.01);
+      box-shadow: var(--lg-shadow-strong);
+    }
+
+    /* Header Styles */
+    .header {
+      min-height: 200px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      color: white;
       text-align: center;
-      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      border-radius: 0 0 var(--card-radius) var(--card-radius);
+      background: linear-gradient(-45deg, var(--lg-red), #ff0844, #a50034, #d10a42);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
     }
 
-    h1 {
-      font-size: 3rem;
-      font-weight: 800;
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .header-content {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s forwards 0.5s;
+      z-index: 10;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="email"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: var(--btn-radius);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background-color: white;
+    }
+
+    body.dark-mode input[type="text"],
+    body.dark-mode input[type="tel"],
+    body.dark-mode input[type="number"],
+    body.dark-mode input[type="email"],
+    body.dark-mode select,
+    body.dark-mode textarea {
+      background-color: #333;
+      color: #f8f9fa;
+      border-color: #555;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--lg-red);
+      box-shadow: 0 0 0 3px rgba(165, 0, 52, 0.1);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--btn-radius);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 1rem;
+      border: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background-color: var(--lg-red);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--lg-dark-red);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(165, 0, 52, 0.3);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-secondary {
+      background-color: #f0f0f0;
+      color: var(--lg-dark);
+    }
+
+    body.dark-mode .btn-secondary {
+      background-color: #333;
+      color: #f8f9fa;
+    }
+
+    .btn-secondary:hover {
+      background-color: #e0e0e0;
+      transform: translateY(-2px);
+    }
+
+    body.dark-mode .btn-secondary:hover {
+      background-color: #444;
+    }
+
+    /* Ripple Effect */
+    .btn .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.5);
+      transform: scale(0);
+      animation: ripple 0.6s linear;
+      pointer-events: none;
+    }
+
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    /* Toggle Switch */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 30px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 22px;
+      width: 22px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--lg-red);
+    }
+
+    input:focus + .slider {
+      box-shadow: 0 0 1px var(--lg-red);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(30px);
+    }
+
+    /* Utilities */
+    .icon {
+      color: var(--lg-red);
+    }
+
+    body.dark-mode .icon {
+      color: var(--lg-light-red);
+    }
+
+    .important-note {
+      background-color: rgba(165, 0, 52, 0.05);
+      border-left: 4px solid var(--lg-red);
+      padding: 1rem;
+      border-radius: 0 var(--btn-radius) var(--btn-radius) 0;
+      margin: 1rem 0;
+    }
+
+    body.dark-mode .important-note {
+      background-color: rgba(165, 0, 52, 0.1);
+    }
+
+    /* File Upload */
+    .file-input {
+      display: none;
+    }
+
+    .file-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #f0f0f0;
+      border-radius: var(--btn-radius);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 500;
+    }
+
+    body.dark-mode .file-label {
+      background-color: #333;
+      color: #f8f9fa;
+    }
+
+    .file-label:hover {
+      background-color: #e0e0e0;
+      transform: translateY(-2px);
+    }
+
+    body.dark-mode .file-label:hover {
+      background-color: #444;
+    }
+
+    /* Tables */
+    .table-container {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
       margin-bottom: 1rem;
     }
 
-    p {
-      font-size: 1.25rem;
-      color: #94a3b8;
-      margin-bottom: 2.5rem;
+    th, td {
+      padding: 0.75rem;
+      border: 1px solid #ddd;
+      text-align: left;
     }
 
-    .button-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
+    body.dark-mode th,
+    body.dark-mode td {
+      border-color: #444;
+    }
+
+    th {
+      background-color: #f5f5f5;
+      font-weight: 500;
+    }
+
+    body.dark-mode th {
+      background-color: #333;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
       justify-content: center;
+      animation: fadeIn 0.3s ease;
     }
 
-    .btn {
-      padding: 1rem 2rem;
-      font-size: 1.125rem;
-      font-weight: 600;
-      border: none;
-      border-radius: 9999px;
+    .modal-content {
+      background-color: white;
+      padding: 2rem;
+      border-radius: var(--card-radius);
+      max-width: 500px;
+      width: 90%;
+      position: relative;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      animation: slideIn 0.3s ease;
+    }
+
+    body.dark-mode .modal-content {
+      background-color: #1e1e1e;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 24px;
       cursor: pointer;
-      background: #1e293b;
+      color: #666;
+      transition: color 0.2s;
+    }
+
+    body.dark-mode .close-modal {
+      color: #aaa;
+    }
+
+    .close-modal:hover {
+      color: var(--lg-red);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #28a745;
       color: white;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--btn-radius);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      transition: all 0.3s ease;
+      z-index: 1000;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: opacity 0.3s, transform 0.3s;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.35);
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .btn-approve {
-      background: var(--purple);
+    /* Accordion */
+    .accordion {
+      margin: 1rem 0;
+      border-radius: var(--btn-radius);
+      overflow: hidden;
     }
 
-    .btn-guide {
-      background: var(--blue);
+    .accordion-header {
+      background-color: #f5f5f5;
+      padding: 1rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background-color 0.2s;
+      font-weight: 500;
     }
 
-    @media(max-width: 500px) {
+    body.dark-mode .accordion-header {
+      background-color: #333;
+    }
+
+    .accordion-header:hover {
+      background-color: #eaeaea;
+    }
+
+    body.dark-mode .accordion-header:hover {
+      background-color: #444;
+    }
+
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      background-color: white;
+    }
+
+    body.dark-mode .accordion-body {
+      background-color: #1e1e1e;
+    }
+
+    .accordion-body-inner {
+      padding: 1rem;
+      border-top: 1px solid #eee;
+    }
+
+    body.dark-mode .accordion-body-inner {
+      border-color: #444;
+    }
+
+    .accordion-icon {
+      transition: transform 0.3s;
+    }
+
+    .accordion.active .accordion-icon {
+      transform: rotate(180deg);
+    }
+
+    /* Checklist */
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .checklist-item input[type="checkbox"] {
+      margin-top: 0.3rem;
+      margin-right: 0.5rem;
+    }
+
+    .checklist-item.completed {
+      color: #999;
+      text-decoration: line-through;
+    }
+
+    /* Floating Button */
+    .floating-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      background: var(--lg-red);
+      color: white;
+      border-radius: 50%;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .floating-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 5px 20px rgba(165, 0, 52, 0.3);
+    }
+
+    .floating-btn i {
+      font-size: 24px;
+    }
+
+    /* Progress Bar */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--lg-red), var(--lg-light-red));
+      width: 0%;
+      z-index: 1000;
+      transition: width 0.2s;
+    }
+
+    /* Custom Cursor */
+    .cursor-dot {
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      background-color: var(--lg-red);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      transition: transform 0.1s;
+    }
+
+    .cursor-outline {
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 40px;
+      height: 40px;
+      border: 2px solid rgba(165, 0, 52, 0.5);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9998;
+      transition: all 0.1s;
+    }
+
+    /* QR Code */
+    #qrcode {
+      display: flex;
+      justify-content: center;
+      margin: 1rem 0;
+    }
+
+    /* Emoji Animation */
+    @keyframes emoji-pop {
+      0% { transform: scale(0); opacity: 1; }
+      70% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); opacity: 0; }
+    }
+
+    .emoji-pop {
+      position: absolute;
+      font-size: 2rem;
+      pointer-events: none;
+      animation: emoji-pop 0.6s forwards;
+      z-index: 1001;
+    }
+
+    /* Media Queries */
+    @media (max-width: 768px) {
+      .header {
+        padding: 3rem 1rem;
+      }
+
       h1 {
         font-size: 2rem;
       }
 
-      .btn {
-        width: 100%;
-        justify-content: center;
+      h2 {
+        font-size: 1.5rem;
       }
+
+      .card {
+        padding: 1.5rem;
+      }
+
+      .floating-btn {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+      }
+
+      .floating-btn i {
+        font-size: 20px;
+      }
+
+      /* Hide custom cursor on mobile */
+      .cursor-dot, .cursor-outline {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.75rem;
+      }
+
+      h2 {
+        font-size: 1.25rem;
+      }
+
+      .card {
+        padding: 1rem;
+      }
+    }
+
+    /* For PWA minimal setup */
+    .offline-message {
+      display: none;
+      padding: 1rem;
+      background-color: #f8d7da;
+      color: #721c24;
+      border-radius: var(--btn-radius);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    body.dark-mode .offline-message {
+      background-color: #332222;
+      color: #ff8888;
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    body.dark-mode ::-webkit-scrollbar-track {
+      background: #222;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    /* Parallax Effect */
+    .parallax-section {
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
   </style>
 </head>
 <body>
-  <h1>LG전자 마곡 사이언스파크</h1>
-  <p>강의 안내 페이지에 오신 것을 환영합니다</p>
+  <!-- Progress Bar -->
+  <div id="progress-bar"></div>
 
-  <div class="button-group">
-    <a href="approve.html" class="btn btn-approve">📘 인정신청</a>
-    <a href="guide.html" class="btn btn-guide">🧭 방문안내</a>
-  </div>
-</body>
-</html>
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-outline" id="cursor-outline"></div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-content">
+      <h1>LG전자 마곡 사이언스파크<br>[강의 안내]</h1>
+      <div class="flex items-center justify-center mt-4 gap-3">
+        <span class="text-white">라이트 모드</span>
+        <label class="switch">
+          <input type="checkbox" id="dark-mode-toggle">
+          <span class="slider"></span>
+        </label>
+        <span class="text-white">다크 모드</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Offline message for PWA -->
+    <div class="offline-message" id="offline-message">
+      <i class="fas fa-wifi mr-2"></i> 현재 오프라인 상태입니다. 저장된 데이터를 표시합니다.
+    </div>
+
+    <!-- Link Creation Instructions -->
+    <section class="card parallax-section" data-aos="fade-up">
+      <h2><i class="fas fa-link icon"></i> 링크 생성 공유 방법</h2>
+      <ol class="list-decimal pl-5 space-y-2">
+        <li>아래 양식을 작성한 뒤, 오른쪽 하단의 <span class="text-red-600 font-bold">링크 생성</span> 버튼을 클릭합니다.</li>
+        <li>생성된 링크를 복사하여 운영자에게 메일로 전달해주세요 😊</li>
+      </ol>
+      <div class="mt-4 bg-gray-50 p-4 rounded-lg text-sm dark:bg-gray-800">
+        <p class="flex items-start">
+          <i class="fas fa-info-circle text-blue-500 mr-2 mt-1"></i>
+          <span>링크가 길게 보이더라도 모든 입력 정보가 포함되어 있으니 전체 링크를 복사해 주세요.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- Recent Submissions -->
+    <section class="card parallax-section" data-aos="fade-up">
+      <h2><i class="fas fa-history icon"></i> 최근 제출 기록</h2>
+      <div id="recent-submissions" class="mt-3">
+        <p class="text-gray-500 dark:text-gray-400 text-center py-4">최근 제출 기록을 불러오는 중...</p>
+      </div>
+    </section>
+
+    <!-- Preliminary Check -->
+    <section class="card parallax-section" data-aos="fade-up">
+      <h2><i class="fas fa-clipboard-check icon"></i> 사전 확인</h2>
+      <div class="form-group">
+        <h3 class="flex items-center"><i class="fas fa-download text-blue-500 mr-2"></i> 교육생이 사전 준비해야 하는 설치 파일/프로그램 공유</h3>
+        <div class="mt-3">
+          <input type="file" id="program-file" class="file-input">
+          <label for="program-file" class="file-label">
+            <i class="fas fa-file-upload"></i> 파일 선택
+          </label>
+          <span id="program-file-name" class="ml-3 text-gray-500">선택된 파일 없음</span>
+        </div>
+      </div>
+
+      <div class="form-group mt-6">
+        <h3 class="flex items-center"><i class="fas fa-book text-green-500 mr-2"></i> 교재 제공 방식</h3>
+        <div class="mt-3 space-y-3">
+          <div class="flex items-center">
+            <input type="checkbox" id="pdf-material" class="mr-2 checklist-trigger">
+            <label for="pdf-material">PDF 교재</label>
+          </div>
+          <div id="pdf-material-file" class="hidden ml-6">
+            <input type="file" id="pdf-file" class="file-input">
+            <label for="pdf-file" class="file-label">
+              <i class="fas fa-file-pdf"></i> 파일 선택
+            </label>
+            <span id="pdf-file-name" class="ml-3 text-gray-500">선택된 파일 없음</span>
+          </div>
+        </div>
+        <div class="mt-4">
+          <div class="flex items-center">
+            <input type="checkbox" id="printed-material" class="mr-2 checklist-trigger">
+            <label for="printed-material">서면 교재</label>
+          </div>
+          <div id="printed-material-info" class="hidden ml-6 mt-3">
+            <div class="important-note">
+              <p class="flex items-center gap-2">
+                <strong>교재 배송지:</strong> 
+                <span>서울 강서구 마곡중앙로 10로 10, LG사이언스파크 W10동 지하1층 메일센터</span>
+                <a href="https://map.naver.com/p/search/LG%EC%82%AC%EC%9D%B4%EC%96%B8%EC%8A%A4%ED%8C%8C%ED%81%AC" target="_blank" class="text-blue-500 hover:underline flex items-center">
+                  <i class="fas fa-map-marker-alt"></i> 지도 보기
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mt-6">
+        <h3 class="flex items-center"><i class="fas fa-laptop text-purple-500 mr-2"></i> 노트북/모니터 지원 필요 여부</h3>
+        <div class="mt-3 space-y-3">
+          <div class="flex items-center">
+            <input type="checkbox" id="laptop-needed" class="mr-2 checklist-trigger">
+            <label for="laptop-needed">노트북 지원 필요</label>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" id="monitor-needed" class="mr-2 checklist-trigger">
+            <label for="monitor-needed">모니터 지원 필요</label>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" id="no-equipment-needed" class="mr-2">
+            <label for="no-equipment-needed">해당 사항 없음</label>
+          </div>
+          <div id="equipment-details" class="hidden mt-3">
+            <textarea class="p-3 border border-gray-300 rounded-md w-full" rows="3" placeholder="필요한 장비 스펙 및 개수를 상세히 기재해 주세요."></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Entrance Information -->
+    <section class="card parallax-section" data-aos="fade-up">
+      <h2><i class="fas fa-door-open icon"></i> 출입 안내</h
