@@ -1,196 +1,530 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>LG전자 마곡 사이언스파크 강의 안내</title>
-  <!-- Tailwind, FontAwesome, AOS -->
+  <title>LG Science Park 방문 안내</title>
+  <!-- DESIGN SYSTEM & ICONS -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Montserrat:wght@500;700&display=swap"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
   <style>
     :root {
-      --lg-red: #d32f2f; /* Pantone Red 2025 */
-      --lg-gray: #58595b;
-      --lg-light-gray: #f8f8f8;
-      --lg-dark: #333333;
-      --lg-light-blue: #1e88e5;
-      --lg-ivory: #f5f5f5;
+      --panton25-red: #B8202E;         /* 선택: Red Orange (Pantone 2025: PANTONE 18-1750 "Peach Fuzz"는 밝은 피치+레드, 아날로그로 현대적 레드 적용) */
+      --panton25-peach: #FFBE98;       /* Peach Fuzz */
+      --panton25-purple: #9884E8;      /* 현대적 인디고/보라 */
+      --panton25-sky: #6EC3F4;         /* 트렌디 민트톤 스카이블루 */
+      --panton25-gray: #ECE9F1;
+      --main-red: var(--panton25-red);
+      --main-bg: #FCF7F8;
+      --sub-bg: var(--panton25-gray);
+      --neutral-txt: #18181B;
+      --sub-txt: #505050;
+      --section-radius: 18px;
+      --shadow: 0 4px 24px 0 rgba(184,32,46,0.09);
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    body {
-      font-family: 'Noto Sans KR', sans-serif;
-      background-color: #fafbfc;
-      color: var(--lg-dark);
-      line-height: 1.6;
+    html, body {
+      height: 100%;
+      background: var(--main-bg);
+      font-family: 'Noto Sans KR', 'Montserrat', sans-serif;
+      font-size: 15px;
+      color: var(--neutral-txt);
+      line-height: 1.7;
+      letter-spacing: -0.01em;
+      overflow-x: hidden;
     }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 1rem;
+    .g-brand { color: var(--main-red); }
+    .g-bg-main { background: var(--main-bg); }
+    .g-bg-sub { background: var(--sub-bg); }
+    .g-btn {
+      transition: var(--transition);
+      box-shadow: 0 2px 5px 0 rgba(184,32,46,0.13);
     }
-    /* Header Style */
-    .lg-gradient-header {
-      background: linear-gradient(96deg, #d32f2f 10%, #ff5f6d 53%, #d32f2f 95%);
-      color: #fff;
-      padding: 3.5rem 1rem 2rem 1rem;
-      border-radius: 0 0 2.2rem 2.2rem;
-      text-align: center;
+    .g-btn:hover {
+      background: #a61d2b;
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 6px 20px 0 rgba(184,32,46,0.13);
+    }
+    .section-card {
+      background: #fff;
+      border-radius: var(--section-radius);
+      box-shadow: var(--shadow);
+      padding: 2.2rem 2rem 1.7rem 2rem;
+      margin-bottom: 2rem;
+      transition: var(--transition);
+    }
+    @media (max-width: 520px) {
+      .section-card {
+        padding: 1.2rem 0.7rem 1rem 0.7rem;
+      }
+    }
+    .section-title {
+      font-size: 1.26rem;
+      font-weight: 700;
+      margin-bottom: 0.9rem;
+      color: var(--main-red);
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 0.7em;
+    }
+    .section-desc {
+      font-size: 1rem;
+      color: var(--sub-txt);
+      margin-bottom: 1.0rem;
+    }
+    .timeline {
+      border-left: 3.2px solid var(--main-red);
+      margin-left: 15px;
+      padding-left: 22px;
+      min-height: 1em;
       position: relative;
     }
-    .lg-gradient-header-title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      line-height: 1.15;
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.3rem;
     }
-    .lg-gradient-header-sub {
-      font-size: 1.1rem;
-      font-weight: 500;
-      opacity: 0.85;
-      margin-top: 0.5rem;
-      color: #f5f5f5;
-    }
-
-    /* Card Styles */
-    .lg-card {
-      background: #fff;
-      border-radius: 1.25rem;
-      box-shadow: 0 8px 24px rgba(165, 0, 52, 0.06);
-      transition: transform .25s cubic-bezier(.4, 0, .2, 1), box-shadow .25s;
-    }
-    .lg-card:hover {
-      transform: translateY(-5px) scale(1.015);
-      box-shadow: 0 20px 35px -10px rgba(165, 0, 52, 0.13);
-    }
-    
-    /* Floating Button */
-    .floating-btn {
-      position: fixed;
-      right: 2rem;
-      bottom: 2rem;
+    .timeline-dot {
+      position: absolute; left: -27px; top: 4px;
+      width: 20px; height: 20px;
+      background: var(--main-red);
       border-radius: 50%;
-      width: 62px;
-      height: 62px;
-      background: linear-gradient(90deg, #d32f2f 0, #ff5f6d 100%);
-      box-shadow: 0 7px 35px 0 rgba(165, 0, 52, 0.10);
-      color: #fff;
-      font-size: 1.7rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 90;
-      cursor: pointer;
-      transition: transform .2s;
+      border: 5px solid var(--main-bg);
+      z-index: 1;
     }
-    .floating-btn:hover {
-      transform: scale(1.08);
-    }
-
-    /* Checklist Items */
-    .checklist-item {
-      display: flex;
-      align-items: center;
-    }
-    .checklist-item.completed {
-      color: #bbb;
-    }
-
-    /* FAQ Accordion */
-    .accordion-panel {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .5s ease, padding .5s ease;
+    .timeline-content {
+      border-radius: 1em;
       background: #fff;
-      padding: 0;
+      box-shadow: var(--shadow);
+      padding: 1.2rem 1.3rem 1.05rem 1.2rem;
+      margin-bottom: 0.2em;
+      min-width: 0;
+      transition: background 0.08s;
     }
-    .accordion-item.active .accordion-panel {
-      padding: 16px;
-      max-height: 500px;
+    .timeline-label {
+      font-size: 0.98rem;
+      font-weight: 500;
+      margin-bottom: 0.1rem;
+      letter-spacing: 0;
     }
-
-    /* Buttons */
-    .btn-primary {
-      background-color: #d32f2f;
-      color: white;
+    .timeline-icon {
+      vertical-align: middle;
+      font-size: 1rem;
+      color: var(--panton25-sky);
+      margin-right: 0.5em;
     }
-    .btn-primary:hover {
-      background-color: #8a0029;
+    .timeline-content p, .timeline-content ul, .timeline-content li {
+      font-size: 0.98rem;
+      color: var(--sub-txt);
     }
-
-    /* Form Styles */
+    .timeline-content ul {
+      margin-left: 1.2em;
+      margin-bottom: 0;
+      list-style: disc;
+    }
+    .input-row {
+      display: flex;
+      gap: 1em;
+      flex-wrap: wrap;
+      margin-bottom: 0.7em;
+    }
+    .input-row input, .input-row select {
+      min-width: 120px;
+      font-size: 0.97rem;
+    }
+    .input-row .form-label {
+      min-width: 68px;
+    }
+    .form-label {
+      font-weight: 500;
+      margin-bottom: 0.15em;
+      font-size: 1rem;
+      color: var(--main-red);
+      display: block;
+    }
     .form-control {
-      width: 100%;
-      padding: 0.75rem;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-    }
-    .form-control:focus {
+      border: 1.5px solid var(--panton25-gray);
+      border-radius: 7px;
+      font-size: 0.98rem;
+      padding: 0.6em 1em;
       outline: none;
-      border-color: #d32f2f;
-      box-shadow: 0 0 0 3px rgba(165, 0, 52, 0.1);
+      width: 100%;
+      background: #fdfdfd;
+      transition: border 0.2s;
+      margin-bottom: 0.35em;
     }
-  </style>
+    .form-control:focus { border: 1.7px solid var(--main-red); background: #fff1f1;}
+    .checkbox-label {
+      font-size: 0.96rem; color: var(--main-red); letter-spacing: -0.01em; display: inline-flex; align-items: center;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--panton25-gray);
+      background: #fff;
+    }
+    .faq-title-btn {
+      display: flex; justify-content: space-between; align-items: center;
+      width: 100%; padding: 0.95em 0.5em; font-weight: 600; color: var(--main-red);
+      background: none; border: none; font-size: 1rem; text-align: left; cursor: pointer;
+      transition: background 0.22s;
+    }
+    .faq-title-btn:hover { background: #ffe3e4;}
+    .faq-answer {
+      padding: 0.88em 1.0em 0.6em 1.2em;
+      color: #555; font-weight: 400; font-size: 0.98rem;
+      display: none;
+      background: #fff8f6;
+    }
+    .faq-item.open .faq-answer { display: block; animation: fadein 0.17s;}
+    @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+    .tip {
+      background: var(--panton25-peach);
+      color: var(--main-red);
+      border-radius: 6.5px;
+      font-size: 0.97rem;
+      padding: 0.4em 0.85em;
+      display: inline-block;
+      margin: 0.58em 0 0.6em 0;
+      box-shadow: 0 2px 4px rgba(184,32,46,0.05);
+      letter-spacing: -0.01em;
+    }
+    .main-btn {
+      background: linear-gradient(90deg, var(--main-red), var(--panton25-peach), var(--main-red) 95%);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      outline: none;
+      border-radius: 9px;
+      padding: 11px 32px;
+      cursor: pointer;
+      transition: var(--transition);
+      margin: 2em auto 0;
+      display: block;
+      box-shadow: var(--shadow);
+      letter-spacing: 0.01em;
+    }
+    .main-btn:active { background: var(--main-red); }
+    .toast { 
+      display: none; position: fixed; left: 50%; bottom: 38px;
+      padding: 10px 38px; font-weight: 600;
+      min-width: 180px; border-radius: 20px;
+      background: var(--main-red); color: #fff;
+      font-size: 1.0rem; text-align: center;
+      box-shadow: 0 1px 8px 0 rgba(184,32,46,0.11);
+      z-index: 2050; transform: translateX(-50%);
+      animation: fadein 0.18s;
+    }
+    .toast.show { display: block; }
+    .form-helper { font-size: 0.92rem; color: var(--main-red); margin: 4px 0 0 0;}
+    ul.checklist {
+      list-style: none;
+      margin: 0; padding: 0;
+      font-size: 0.98rem;
+    }
+    ul.checklist li {
+      display: flex; gap: 0.65em; align-items: flex-start; margin-bottom: 6.5px;
+      color: var(--main-red);
+    }
+    ul.checklist input[type="checkbox"]:checked + span { text-decoration: line-through; color: #aaa;}
+    /* 그리드 반응형 */
+    .grid-2col {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+    }
+    @media (max-width: 700px) {
+      .grid-2col { grid-template-columns: 1fr; gap: 8px;}
+    }
+    /* 각 섹션 간 여백 통일 */
+    section, .section-card { margin-bottom: 1.9rem !important; }
+    .mb-large { margin-bottom: 2.6em !important;}
+    </style>
 </head>
 <body>
-
-  <!-- Header -->
-  <header class="lg-gradient-header" data-aos="fade-down">
-    <h1 class="lg-gradient-header-title">LG전자 마곡 사이언스파크</h1>
-    <div class="lg-gradient-header-sub">강사님을 위한 종합 안내 페이지입니다.</div>
+  <!-- HEADER -->
+  <header class="mb-large">
+    <div class="container text-left pt-12 pb-7">
+      <h1 class="font-bold text-2xl sm:text-3xl tracking-tight g-brand mb-2">LG Science Park 방문 안내</h1>
+      <span class="text-lg text-gray-700" style="font-weight:500;">강사님을 위한 안내 페이지입니다.</span>
+    </div>
   </header>
+  <main class="container">
 
-  <!-- Main Content -->
-  <main class="container mt-10 mb-8">
-    
-    <!-- Link Generation Section -->
-    <section class="lg-card mb-10 px-6 py-7" data-aos="fade-up">
-      <h2 class="flex items-center text-[1.6rem] font-bold mb-3"><i class="fas fa-link mr-2 text-[#d32f2f]"></i> 링크 생성 공유 방법</h2>
-      <ol class="pl-5 pb-2 text-lg space-y-1">
-        <li>아래 양식을 모두 작성한 뒤, <b class="text-[#d32f2f]">오른쪽 하단의 링크 생성</b> 버튼을 누르세요.</li>
-        <li>생성된 링크를 복사해 운영자에게 메일로 전달해주세요 😊</li>
-      </ol>
+    <!-- 1. 링크 생성 및 공유 -->
+    <section class="section-card" id="guide-link">
+      <div class="section-title"><i class="fas fa-link"></i> 링크 생성 및 공유 안내</div>
+      <div class="section-desc">모든 정보를 입력한 뒤, 아래 <span class="g-brand font-bold">링크 생성</span> 버튼을 클릭하면 입력하신 정보로 공유 가능한 링크가 생성됩니다.<br>해당 링크를 <span class="g-brand font-semibold">운영자에게 메일로 전달</span>해주세요.</div>
     </section>
 
-    <!-- Timeline Section -->
-    <section class="relative pb-12 mb-10" data-aos="fade-up" data-aos-delay="80">
-      <div class="hidden md:block timeline-bar"></div>
-      <div class="grid md:grid-cols-2 gap-10 md:gap-0 relative">
-        
-        <!-- Visit Location Card -->
-        <div class="timeline-item pl-0 md:pr-14 md:mb-0 mb-8" data-aos="fade-right" style="margin-bottom:40px;">
-          <div class="lg-card py-6 px-7 relative shadow-md">
-            <div class="timeline-dot"></div>
-            <h3 class="flex font-semibold text-lg text-[#d32f2f] items-center mb-2"><i class="fas fa-map-marker-alt mr-2"></i> 방문 장소</h3>
-            <div class="flex items-center text-base mb-2"><i class="fas fa-building text-[#d32f2f] mr-1"></i> LG사이언스파크 W10동 1층 안내데스크 방문 후 입장</div>
-            <a href="https://map.naver.com/p/search/LG사이언스파크" target="_blank" class="text-blue-600 hover:underline bg-blue-100 px-2.5 py-1.5 rounded font-bold inline-flex items-center mt-2"><i class="fas fa-map mr-1 opacity-80"></i>지도보기</a>
+    <!-- 2. 방문장소 & 절차 타임라인 -->
+    <section class="section-card" id="timeline">
+      <div class="section-title"><i class="fas fa-route"></i> 방문 준비 & 절차 타임라인</div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-label"><i class="fas fa-map-marker-alt timeline-icon"></i>방문 장소</span>
+            <span class="font-medium">LG Science Park W10동 1층 안내데스크 방문 후 입장</span>
           </div>
         </div>
-
-        <!-- Entry Guide Card -->
-        <div class="timeline-item pr-0 md:pl-14 md:mb-0 mb-8" data-aos="fade-left">
-          <div class="lg-card py-6 px-7 relative shadow-md">
-            <div class="timeline-dot"></div>
-            <h3 class="flex font-semibold text-lg text-[#d32f2f] items-center mb-2"><i class="fas fa-door-open mr-2"></i> 출입 안내</h3>
-            <div class="space-y-2 mb-2">
-              <div class="flex items-center text-base"><i class="fas fa-exclamation-triangle text-yellow-600 mr-1"></i>
-                <a href="https://visit.lg.com/" target="_blank" class="ml-1 text-blue-600 hover:underline">방문포털 접속</a>하여 비회원 방문 등록 필수</div>
-              <div class="flex items-center text-base"><i class="fas fa-info-circle text-blue-600 mr-1"></i> 노트북 등 기타 전자기기는 "반입물품" 란에 반드시 입력해야 합니다.</div>
-              <div class="pl-5 pt-2 text-sm text-gray-700">운영자 정보 | 김미진(9698) / 선송이(7020) / 유지혜(0530) / 정하연(6894)</div>
-            </div>
-            <ul class="pl-7 pt-3 space-y-1 text-[15px]">
-              <li class="relative before:absolute before:top-2 before:-left-6 before:w-3 before:h-3 before:bg-[#d32f2f] before:rounded-full before:content-[''] font-bold">LG 방문신청 약관 동의</li>
-              <li class="relative before:absolute before:top-2 before:-left-6 before:w-3 before:h-3 before:bg-[#d32f2f] before:rounded-full before:content-['']">방문장소: LG전자 마곡 선택</li>
-              <li class="relative before:absolute before:top-2 before:-left-6 before:w-3 before:h-3 before:bg-[#d32f2f] before:rounded-full before:content-['']">방문자/운영자 정보 입력</li>
-              <li class="relative before:absolute before:top-2 before:-left-6 before:w-3 before:h-3 before:bg-[#d32f2f] before:rounded-full before:content-['']">방문날짜: 강의 기간 기간 지정</li>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-label"><i class="fas fa-door-open timeline-icon"></i>출입등록 (사전필수)</span>
+            <a href="https://visit.lg.com/" class="g-brand font-medium underline" target="_blank">방문포털 접속하기</a>
+            <p class="mt-2">출입 등록/예약은 위 링크에서 반드시 <span class="g-brand font-bold">사전 완료</span>해 주세요. 비회원으로도 예약 가능합니다.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content"><span class="timeline-label"><i class="fas fa-user timeline-icon"></i>운영자 정보 참고</span>
+            <p class="mb-0">김미진(9698), 선송이(7020), 유지혜(0530), 정하연(6894)</p>
+            <div class="text-xs text-gray-500 font-normal">(교육서비스센터 담당자)</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-label"><i class="fas fa-exclamation-circle timeline-icon"></i>도착/출입 절차 요약</span>
+            <ul class="checklist">
+              <li><input type="checkbox"> <span>장비 점검이 필요한 경우, <b>교육 시작 30분 전까지 도착</b></span></li>
+              <li><input type="checkbox"> <span>신분증 지참, 안내데스크에서 방문증 수령</span></li>
+              <li><input type="checkbox"> <span>방문증은 항상 패용</span></li>
+              <li><input type="checkbox"> <span>방문증은 받은 건물의 안내데스크에 반납(예: W10동에서 수령 → W10동 반납)</span></li>
             </ul>
           </div>
         </div>
       </div>
     </section>
-    
-    <!-- Additional content can be added here -->
+    <!-- 3. 사전 준비 및 교재 안내 -->
+    <section class="section-card" id="preparation">
+      <div class="section-title"><i class="fas fa-clipboard-check"></i> 사전 준비사항</div>
+      <div class="grid-2col">
+        <div>
+          <div class="form-label">설치파일/프로그램(필요시)</div>
+          <input type="file" class="form-control" id="program-file">
+          <div class="form-helper" id="program-file-name">선택된 파일 없음</div>
+        </div>
+        <div>
+          <div class="form-label">교재 제공 방식</div>
+          <div class="flex items-center gap-2 mb-1"><input type="checkbox" id="mat-pdf"><label for="mat-pdf" class="checkbox-label">PDF 교재</label></div>
+          <div class="flex items-center gap-2 mb-1"><input type="checkbox" id="mat-paper"><label for="mat-paper" class="checkbox-label">서면 교재</label></div>
+          <div class="flex items-center gap-2 mb-1"><input type="checkbox" id="mat-none"><label for="mat-none" class="checkbox-label">해당 사항 없음</label></div>
+          <div class="tip mt-3"><i class="fas fa-box"></i> 교재 배송지: 서울 강서구 마곡중앙로 10로 10, LG사이언스파크 W10동 지하1층 메일센터</div>
+        </div>
+      </div>
+    </section>
 
+    <!-- 4. 강사정보 입력 -->
+    <section class="section-card" id="instructor">
+      <div class="section-title"><i class="fas fa-chalkboard-teacher"></i> 강사 정보 입력</div>
+      <div class="input-row">
+        <label class="form-label w-24">업체명</label>
+        <input type="text" class="form-control flex-1" id="company-name" placeholder="예: LG전자">
+      </div>
+      <div class="input-row">
+        <label class="form-label w-20">성함</label>
+        <input type="text" class="form-control flex-1" id="instructor-name" placeholder="예: 김엘지">
+        <label class="form-label w-20">연락처</label>
+        <input type="text" class="form-control flex-1" id="phone-number" placeholder="예: 010-1234-5678">
+      </div>
+      <div class="pt-3">
+        <div class="form-label">차량 정보 <span class="text-xs text-gray-400">(주차 필요시)</span></div>
+        <div id="vehicle-list"></div>
+        <button type="button" class="btn btn-secondary mt-1 mb-2" onclick="addVehicleField()"><i class="fas fa-plus"></i> 차량 추가</button>
+      </div>
+    </section>
+
+    <!-- 5. 반입 장비 정보 -->
+    <section class="section-card" id="equipment">
+      <div class="section-title"><i class="fas fa-laptop"></i> 반입 장비 및 저장매체 정보</div>
+      <div class="tip mb-3"><i class="fas fa-wifi"></i> 무선랜 게스트망 연결을 위해 MAC 주소 정보가 필수입니다. (노트북은 cmd 'ipconfig /all'로 확인 가능)</div>
+      <div class="important-note mb-4">
+        <p class="flex items-start"><i class="fas fa-hdd text-orange-600 mr-2 mt-1"></i> 외장하드 등 저장매체는 원칙상 반입이 불가합니다. 필요 시 아래 기입해주세요.</p>
+      </div>
+      <div class="table-container mb-3">
+        <table class="table" id="equip-table">
+          <thead>
+            <tr>
+              <th>장비구분 *</th>
+              <th>제조사</th>
+              <th>기종</th>
+              <th style="width:60px">수량</th>
+              <th>S/N & MAC주소</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-secondary mb-1" onclick="addEquipmentRow()"><i class="fas fa-plus"></i> 장비추가</button>
+      </div>
+      <div>
+        <div class="flex items-center gap-2 mb-2">
+        <input type="checkbox" id="usb-checkbox"><label for="usb-checkbox" class="checkbox-label">외장하드 등 저장매체 반입 시 작성</label>
+        </div>
+        <div id="usb-detail" style="display:none;">
+          <textarea class="form-control mb-2" rows="2" placeholder="저장매체 종류 및 개수, 반입 사유 등을 기입해 주세요."></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. 기타 요청사항 -->
+    <section class="section-card" id="extra">
+      <div class="section-title">
+        <i class="fas fa-list"></i> 기타 요청사항
+      </div>
+      <textarea class="form-control" rows="3" id="extra-text" placeholder="추가 요청사항이 있을 경우 작성해 주세요."></textarea>
+    </section>
+
+    <!-- 7. FAQ -->
+    <section class="section-card mb-large" id="faq">
+      <div class="section-title"><i class="fas fa-question-circle"></i> 자주 묻는 질문 (FAQ)</div>
+      <div>
+        <div class="faq-item">
+          <button type="button" class="faq-title-btn">Q1. 노트북 외에도 태블릿도 MAC 등록이 필요한가요? <i class="fa fa-chevron-down ml-3 text-xs"></i></button>
+          <div class="faq-answer">네, 무선 연결이 필요한 장비는 모두 등록해 주셔야 합니다.</div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-title-btn">Q2. 입차 등록은 필수인가요? <i class="fa fa-chevron-down ml-3 text-xs"></i></button>
+          <div class="faq-answer">네. 사전 등록되지 않으면 출입이 불가합니다.</div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-title-btn">Q3. 장비 반입 목록은 언제까지 제출해야 하나요? <i class="fa fa-chevron-down ml-3 text-xs"></i></button>
+          <div class="faq-answer">최소 방문 3영업일 전까지 제출해 주시기 바랍니다.</div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-title-btn">Q4. 방문증은 어떻게 반납하나요? <i class="fa fa-chevron-down ml-3 text-xs"></i></button>
+          <div class="faq-answer">받은 건물의 안내데스크에 반납해 주세요. <br>예) W10동에서 수령 → W10동 안내데스크 반납</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 링크 생성 버튼 -->
+    <button type="button" class="main-btn" id="link-generate-btn"><i class="fas fa-link"></i> 링크 생성</button>
   </main>
 
+  <!-- 링크 복사 토스트 -->
+  <div class="toast" id="toast-copied">복사 완료! 링크가 클립보드에 저장되었습니다.</div>
+
+  <script>
+  // ========== 차량정보 동적 처리 ========== 
+  let vehicleId = 1; 
+  function addVehicleField() { 
+    const area = document.getElementById('vehicle-list'); 
+    const row = document.createElement('div'); 
+    row.className = "input-row mb-1 vehicle-row"; 
+    row.innerHTML = `<input type="text" class="form-control" placeholder="차종 (예: 그랜저)"> 
+    <input type="text" class="form-control" placeholder="차량번호 (예: 12가 3456)"> 
+    <button type="button" class="btn btn-secondary" onclick="this.parentElement.remove()"><i class="fas fa-minus"></i> 제거</button>`; 
+    area.appendChild(row); 
+  } 
+  // 컴포넌트 초기화 
+  addVehicleField(); 
+
+  // ========== 장비 정보 행 동적 처리 ========== 
+  const equipmentOptions = ["선택","노트북", "네트워크장비", "NAS", "데스크탑", "스마트패드", "샘플폰", "서버장비", "태블릿PC", "AP", "CD", "디지털카메라", "DVD", "기타", "HDD/SSD", "모바일폰", "메모리카드", "USB", "워크스테이션"]; 
+  function addEquipmentRow() { 
+    const tb = document.querySelector('#equip-table tbody'); 
+    const tr = document.createElement('tr'); 
+    tr.innerHTML = 
+      `<td> 
+        <select class="form-control">${equipmentOptions.map(opt=>`<option>${opt}</option>`).join('')}</select> 
+      </td> 
+      <td><input type="text" class="form-control" /></td> 
+      <td><input type="text" class="form-control" /></td> 
+      <td><input type="number" class="form-control" min="1" value="1" style="max-width:50px;" /></td> 
+      <td><input type="text" class="form-control" /></td> 
+      <td><button type="button" class="btn btn-secondary" onclick="this.closest('tr').remove();"><i class="fas fa-minus"></i></button></td>`; 
+    tb.appendChild(tr); 
+  } 
+  addEquipmentRow();
+
+  // ========== 저장매체 토글 ========== 
+  document.getElementById('usb-checkbox').addEventListener('change', function() { 
+    document.getElementById('usb-detail').style.display = this.checked ? "" : "none"; 
+  });
+
+  // ========== FAQ 아코디언 ========== 
+  document.querySelectorAll('.faq-title-btn').forEach(btn => { 
+    btn.addEventListener('click', () => { 
+      btn.parentNode.classList.toggle('open'); 
+    }); 
+  });
+
+  // ========== 파일선택명 표시 ========== 
+  document.getElementById('program-file').addEventListener('change', e => { 
+    document.getElementById('program-file-name').textContent = e.target.files[0]?.name || '선택된 파일 없음'; 
+  });
+
+  // ========== 링크 생성 및 클립보드 복사 ========== 
+  document.getElementById('link-generate-btn').addEventListener('click', function() { 
+    // 링크 데이터 만들기 (최소 항목 예시) 
+    const data = { 
+      company: document.getElementById('company-name').value, 
+      name: document.getElementById('instructor-name').value, 
+      phone: document.getElementById('phone-number').value, 
+      etc: document.getElementById('extra-text').value 
+    }; 
+    const link = location.origin + location.pathname + "?data=" + encodeURIComponent(JSON.stringify(data)); 
+    // 복사 처리 
+    navigator.clipboard.writeText(link); 
+    const toast = document.getElementById('toast-copied'); 
+    toast.classList.add('show'); 
+    setTimeout(() => toast.classList.remove('show'), 1700); 
+  });
+
+  // ========== LOCALSTORAGE 자동 저장/복원 ========== 
+  const LSKEY = "LG_SPARK_GUIDE_DATA"; 
+  function saveLocal() { 
+    const values = { 
+      company: document.getElementById('company-name').value, 
+      name: document.getElementById('instructor-name').value, 
+      phone: document.getElementById('phone-number').value, 
+      extra: document.getElementById('extra-text').value 
+    }; 
+    localStorage.setItem(LSKEY, JSON.stringify(values)); 
+  } 
+  ['company-name','instructor-name','phone-number','extra-text'].forEach(id=>{ 
+    document.getElementById(id).addEventListener('input',saveLocal); 
+  }) 
+  // 복원 
+  window.addEventListener('DOMContentLoaded',() => { 
+    const v = localStorage.getItem(LSKEY); 
+    if(v) { 
+      try{ 
+        const d = JSON.parse(v) 
+        if(d.company) document.getElementById('company-name').value = d.company 
+        if(d.name) document.getElementById('instructor-name').value = d.name 
+        if(d.phone) document.getElementById('phone-number').value = d.phone 
+        if(d.extra) document.getElementById('extra-text').value = d.extra 
+      }catch(e){} 
+    } 
+  });
+
+  // ========== 전체 여백/정렬 조정 ==================== 
+  Array.from(document.querySelectorAll('section, .section-card')).forEach(el=>el.style.marginBottom = "1.8rem");
+
+  // ========== 타이포그래피(폰트 사이즈, 줄간격) 동적 조정 ========== 
+  // 실제 젠스파크 챗 UI 크기 참조 (본문 15px~16px, 제목 18~22px) 
+  document.querySelectorAll('h1').forEach(h=>h.style.fontSize = "1.65rem"); 
+  document.querySelectorAll('.section-title').forEach(st=>st.style.fontSize = "1.06rem"); 
+  document.body.style.fontSize = "15px";
+
+  // ========== 가독성 위한 줄간격 및 문단 간격 통일 ========== 
+  Array.from(document.querySelectorAll('p,li')).forEach(e=>{ 
+    e.style.lineHeight="1.8"; 
+    e.style.marginBottom="0.4em"; 
+    e.style.letterSpacing="-0.01em"; 
+  });
+
+  // ========== AOS 애니메이션 라이브러리 ========== 
+  (function() { 
+    var s=document.createElement("script"); 
+    s.src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"; 
+    s.onload=function(){AOS.init({duration:700,once:true})}; 
+    document.body.append(s); 
+  })();
+  </script>
 </body>
 </html>
