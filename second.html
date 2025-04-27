@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>LG전자 마곡 사이언스파크 강의 안내</title>
   <!-- Tailwind, FontAwesome, AOS -->
@@ -11,197 +11,186 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
   <style>
     :root {
-      --lg-red: #a50034;
+      --lg-red: #d32f2f; /* Pantone Red 2025 */
       --lg-gray: #58595b;
       --lg-light-gray: #f8f8f8;
       --lg-dark: #333333;
-      --radius: 10px;
-      --shadow-light: 0 2px 4px rgba(0,0,0,0.05);
-      --shadow-strong: 0 4px 8px rgba(0,0,0,0.1);
+      --lg-light-blue: #1e88e5;
+      --lg-ivory: #f5f5f5;
     }
-
     body {
       font-family: 'Noto Sans KR', sans-serif;
+      background-color: #fafbfc;
       color: var(--lg-dark);
-      background: #f5f5f5;
       line-height: 1.6;
-      padding-bottom: 100px;
     }
-
     .container {
-      max-width: 1200px;
+      max-width: 900px;
       margin: 0 auto;
       padding: 1rem;
     }
-
-    /* 헤더 */
-    .header {
-      background: var(--lg-red);
-      padding: 1.5rem;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-strong);
-      margin-bottom: 2rem;
+    /* Header Style */
+    .lg-gradient-header {
+      background: linear-gradient(96deg, #d32f2f 10%, #ff5f6d 53%, #d32f2f 95%);
       color: #fff;
+      padding: 3.5rem 1rem 2rem 1rem;
+      border-radius: 0 0 2.2rem 2.2rem;
       text-align: center;
+      position: relative;
+    }
+    .lg-gradient-header-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+    .lg-gradient-header-sub {
+      font-size: 1.1rem;
+      font-weight: 500;
+      opacity: 0.85;
+      margin-top: 0.5rem;
+      color: #f5f5f5;
     }
 
-    h1 {
-      font-size: 40px;
-      font-weight: bold;
-      color: #fff;
-      margin: 30px 0;
-    }
-
-    h2 {
-      font-size: 28px;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 20px;
-    }
-
-    /* 카드 디자인 */
-    .card {
+    /* Card Styles */
+    .lg-card {
       background: #fff;
-      border-radius: var(--radius);
-      padding: 2rem;
-      margin-bottom: 1.5rem;
-      box-shadow: var(--shadow-light);
-      transition: transform .2s, box-shadow .2s;
+      border-radius: 1.25rem;
+      box-shadow: 0 8px 24px rgba(165, 0, 52, 0.06);
+      transition: transform .25s cubic-bezier(.4, 0, .2, 1), box-shadow .25s;
     }
-
-    .card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-strong);
+    .lg-card:hover {
+      transform: translateY(-5px) scale(1.015);
+      box-shadow: 0 20px 35px -10px rgba(165, 0, 52, 0.13);
     }
-
-    .card h3 {
-      font-size: 20px;
-      font-weight: 500;
-      color: var(--lg-dark);
-      margin-bottom: 1rem;
-    }
-
-    .card p {
-      font-size: 16px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      padding: .75rem 1.5rem;
-      border-radius: 8px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all .3s;
-    }
-
-    .btn-primary {
-      background: var(--lg-red);
+    
+    /* Floating Button */
+    .floating-btn {
+      position: fixed;
+      right: 2rem;
+      bottom: 2rem;
+      border-radius: 50%;
+      width: 62px;
+      height: 62px;
+      background: linear-gradient(90deg, #d32f2f 0, #ff5f6d 100%);
+      box-shadow: 0 7px 35px 0 rgba(165, 0, 52, 0.10);
       color: #fff;
-      border: none;
+      font-size: 1.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 90;
+      cursor: pointer;
+      transition: transform .2s;
+    }
+    .floating-btn:hover {
+      transform: scale(1.08);
     }
 
+    /* Checklist Items */
+    .checklist-item {
+      display: flex;
+      align-items: center;
+    }
+    .checklist-item.completed {
+      color: #bbb;
+    }
+
+    /* FAQ Accordion */
+    .accordion-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .5s ease, padding .5s ease;
+      background: #fff;
+      padding: 0;
+    }
+    .accordion-item.active .accordion-panel {
+      padding: 16px;
+      max-height: 500px;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background-color: #d32f2f;
+      color: white;
+    }
     .btn-primary:hover {
-      background: #8a0029;
-      transform: translateY(-1px);
+      background-color: #8a0029;
     }
 
-    .important-note {
-      background: rgba(165,0,52,0.05);
-      border-left: 4px solid var(--lg-red);
-      padding: .75rem;
-      border-radius: 0 var(--radius) var(--radius) 0;
-      margin: 1rem 0;
+    /* Form Styles */
+    .form-control {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid #ddd;
     }
-
-    /* 반응형 디자인 */
-    @media (max-width: 768px) {
-      .container {
-        max-width: 100%;
-        padding: 0;
-      }
-
-      .header {
-        padding: 1rem;
-      }
-
-      h1 {
-        font-size: 32px;
-      }
-
-      h2 {
-        font-size: 22px;
-      }
+    .form-control:focus {
+      outline: none;
+      border-color: #d32f2f;
+      box-shadow: 0 0 0 3px rgba(165, 0, 52, 0.1);
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
+  <!-- Header -->
+  <header class="lg-gradient-header" data-aos="fade-down">
+    <h1 class="lg-gradient-header-title">LG전자 마곡 사이언스파크</h1>
+    <div class="lg-gradient-header-sub">강사님을 위한 종합 안내 페이지입니다.</div>
+  </header>
 
-    <!-- 헤더 -->
-    <div class="header">
-      <h1>LG Science Park 방문 안내</h1>
-      <h2>강사님을 위한 안내 페이지입니다.</h2>
-    </div>
+  <!-- Main Content -->
+  <main class="container mt-10 mb-8">
+    
+    <!-- Link Generation Section -->
+    <section class="lg-card mb-10 px-6 py-7" data-aos="fade-up">
+      <h2 class="flex items-center text-[1.6rem] font-bold mb-3"><i class="fas fa-link mr-2 text-[#d32f2f]"></i> 링크 생성 공유 방법</h2>
+      <ol class="pl-5 pb-2 text-lg space-y-1">
+        <li>아래 양식을 모두 작성한 뒤, <b class="text-[#d32f2f]">오른쪽 하단의 링크 생성</b> 버튼을 누르세요.</li>
+        <li>생성된 링크를 복사해 운영자에게 메일로 전달해주세요 😊</li>
+      </ol>
+    </section>
 
-    <!-- 강사 정보 섹션 -->
-    <div class="card" data-aos="fade-up">
-      <h3><i class="fas fa-user-tie"></i> 강사 정보</h3>
-      <p>업체명: <input type="text" class="form-control" placeholder="예: LG전자"></p>
-      <p>성함: <input type="text" class="form-control" placeholder="예: 김엘지"></p>
-      <p>연락처: <input type="tel" class="form-control" placeholder="예: 010-1234-5678"></p>
-    </div>
+    <!-- Timeline Section -->
+    <section class="relative pb-12 mb-10" data-aos="fade-up" data-aos-delay="80">
+      <div class="hidden md:block timeline-bar"></div>
+      <div class="grid md:grid-cols-2 gap-10 md:gap-0 relative">
+        
+        <!-- Visit Location Card -->
+        <div class="timeline-item pl-0 md:pr-14 md:mb-0 mb-8" data-aos="fade-right" style="margin-bottom:40px;">
+          <div class="lg-card py-6 px-7 relative shadow-md">
+            <div class="timeline-dot"></div>
+            <h3 class="flex font-semibold text-lg text-[#d32f2f] items-center mb-2"><i class="fas fa-map-marker-alt mr-2"></i> 방문 장소</h3>
+            <div class="flex items-center text-base mb-2"><i class="fas fa-building text-[#d32f2f] mr-1"></i> LG사이언스파크 W10동 1층 안내데스크 방문 후 입장</div>
+            <a href="https://map.naver.com/p/search/LG사이언스파크" target="_blank" class="text-blue-600 hover:underline bg-blue-100 px-2.5 py-1.5 rounded font-bold inline-flex items-center mt-2"><i class="fas fa-map mr-1 opacity-80"></i>지도보기</a>
+          </div>
+        </div>
 
-    <!-- 방문 절차 섹션 -->
-    <div class="card" data-aos="fade-up">
-      <h3><i class="fas fa-clipboard-check"></i> 방문 절차</h3>
-      <p>방문 절차는 다음과 같습니다. 아래 버튼을 클릭하여 각 절차를 확인하십시오.</p>
-      <button class="btn btn-primary">방문 절차 확인</button>
-    </div>
+        <!-- Entry Guide Card -->
+        <div class="timeline-item pr-0 md:pl-14 md:mb-0 mb-8" data-aos="fade-left">
+          <div class="lg-card py-6 px-7 relative shadow-md">
+            <div class="timeline-dot"></div>
+            <h3 class="flex font-semibold text-lg text-[#d32f2f] items-center mb-2"><i class="fas fa-door-open mr-2"></i> 출입 안내</h3>
+            <div class="space-y-2 mb-2">
+              <div class="flex items-center text-base"><i class="fas fa-exclamation-triangle text-yellow-600 mr-1"></i>
+                <a href="https://visit.lg.com/" target="_blank" class="ml-1 text-blue-600 hover:underline">방문포털 접속</a>하여 비회원 방문 등록 필수</div>
+              <div class="flex items-center text-base"><i class="fas fa-info-circle text-blue-600 mr-1"></i> 노트북 등 기타 전자기기는 "반입물품" 란에 반드시 입력해야 합니다.</div>
+              <div class="pl-5 pt-2 text-sm text-gray-700">운영자 정보 | 김미진(9698) / 선송이(7020) / 유지혜(0530) / 정하연(6894)</div>
+            </div>
+            <ul class="pl-7 pt-3 space-y-1 text-[15px]">
+              <li class="relative before:absolute before:top-2 before:-left-6 before:w-3 before:h-3 before:bg-[#d32f2f] before:rounded-full before:content-[''] font-bold">LG 방문신청 약관 동의</li>
+              <li class="relative before:absolute before:top-2 before:-left-6 before:w-3 before:h-3 before:bg-[#d32f2f] before:rounded-full before:content-['']">방문장소: LG전자 마곡 선택</li>
+              <li class="relative before:absolute before:top-2 before:-left-6 before:w-3 before:h-3 before:bg-[#d32f2f] before:rounded-full before:content-['']">방문자/운영자 정보 입력</li>
+              <li class="relative before:absolute before:top-2 before:-left-6 before:w-3 before:h-3 before:bg-[#d32f2f] before:rounded-full before:content-['']">방문날짜: 강의 기간 기간 지정</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Additional content can be added here -->
 
-    <!-- 링크 생성 섹션 -->
-    <div class="card" data-aos="fade-up">
-      <h3><i class="fas fa-link"></i> 링크 생성</h3>
-      <p>이 양식을 작성 후, 아래 링크 생성 버튼을 클릭하여 공유 링크를 생성할 수 있습니다.</p>
-      <button class="btn btn-primary" id="create-link-btn">링크 생성</button>
-    </div>
-
-    <!-- 교재 제공 방식 -->
-    <div class="card" data-aos="fade-up">
-      <h3><i class="fas fa-book"></i> 교재 제공 방식</h3>
-      <label for="pdf-material">PDF 교재</label>
-      <input type="checkbox" id="pdf-material"><br>
-      <label for="printed-material">서면 교재</label>
-      <input type="checkbox" id="printed-material">
-    </div>
-
-    <!-- 기타 요청 사항 -->
-    <div class="card" data-aos="fade-up">
-      <h3><i class="fas fa-comment-alt"></i> 기타 요청사항</h3>
-      <textarea class="form-control" rows="5" placeholder="추가 요청사항이 있으시면 작성해주세요."></textarea>
-    </div>
-
-  </div>
-
-  <!-- Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <script>
-    AOS.init({
-      once: true,
-      duration: 600
-    });
-
-    // 링크 생성 기능
-    document.getElementById('create-link-btn').onclick = function() {
-      let companyName = document.querySelector('input[placeholder="예: LG전자"]').value;
-      let instructorName = document.querySelector('input[placeholder="예: 김엘지"]').value;
-      let phoneNumber = document.querySelector('input[placeholder="예: 010-1234-5678"]').value;
-      let link = `https://example.com?company=${companyName}&name=${instructorName}&phone=${phoneNumber}`;
-      alert("링크가 생성되었습니다! " + link);
-    };
-  </script>
+  </main>
 
 </body>
 </html>
