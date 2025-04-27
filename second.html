@@ -1,706 +1,237 @@
-/* Reset & Base Styles */
-:root {
-    --primary-color: #a50034;
-    --primary-hover: #c1355d;
-    --secondary-color: #3b82f6;
-    --secondary-hover: #60a5fa;
-    --text-dark: #333333;
-    --text-light: #f9f9f9;
-    --bg-light: #f9f9f9;
-    --bg-dark: #1a1a1a;
-    --card-light: #ffffff;
-    --card-dark: #2a2a2a;
-    --border-light: #e0e0e0;
-    --border-dark: #444444;
-    --shadow-light: 0 8px 30px rgba(0, 0, 0, 0.08);
-    --shadow-dark: 0 8px 30px rgba(0, 0, 0, 0.3);
-    --transition: all 0.3s ease;
-    --radius: 12px;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    background-color: var(--bg-light);
-    color: var(--text-dark);
-    transition: var(--transition);
-    overflow-x: hidden;
-    position: relative;
-}
-
-body.dark-mode {
-    background-color: var(--bg-dark);
-    color: var(--text-light);
-}
-
-a {
-    text-decoration: none;
-    color: var(--primary-color);
-    transition: var(--transition);
-}
-
-a:hover {
-    color: var(--primary-hover);
-}
-
-/* Header Styles */
-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    z-index: 100;
-    background-color: rgba(249, 249, 249, 0.8);
-    backdrop-filter: blur(10px);
-    transition: var(--transition);
-}
-
-.dark-mode header {
-    background-color: rgba(26, 26, 26, 0.8);
-}
-
-/* Theme Toggle */
-.theme-toggle {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 46px;
-    height: 24px;
-}
-
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: var(--transition);
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 18px;
-    width: 18px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    transition: var(--transition);
-}
-
-.switch input:checked + .slider {
-    background-color: var(--secondary-color);
-}
-
-.switch input:checked + .slider:before {
-    transform: translateX(22px);
-}
-
-.slider.round {
-    border-radius: 34px;
-}
-
-.slider.round:before {
-    border-radius: 50%;
-}
-
-/* Button Styles */
-.button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    border-radius: 50px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition);
-    border: none;
-    outline: none;
-    position: relative;
-    overflow: hidden;
-}
-
-.primary-button {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-.primary-button:hover {
-    background-color: var(--primary-hover);
-}
-
-.secondary-button {
-    background-color: var(--secondary-color);
-    color: white;
-}
-
-.secondary-button:hover {
-    background-color: var(--secondary-hover);
-}
-
-.outline-button {
-    background-color: transparent;
-    border: 1px solid var(--border-light);
-    color: var(--text-dark);
-}
-
-.dark-mode .outline-button {
-    border-color: var(--border-dark);
-    color: var(--text-light);
-}
-
-.outline-button:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-}
-
-.dark-mode .outline-button:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-}
-
-.icon-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--text-dark);
-    transition: var(--transition);
-}
-
-.dark-mode .icon-button {
-    color: var(--text-light);
-}
-
-.icon-button:hover {
-    color: var(--primary-color);
-}
-
-.button-group {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-
-/* Cursor Trail Effect */
-.cursor-trail {
-    position: fixed;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: rgba(165, 0, 52, 0.3);
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-    transition: width 0.1s, height 0.1s;
-}
-
-/* Main Content Styles */
-main {
-    padding-top: 80px;
-    min-height: calc(100vh - 60px); /* Account for footer */
-}
-
-.hero {
-    text-align: center;
-    padding: 4rem 1rem;
-    margin-bottom: 2rem;
-}
-
-h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-}
-
-.subtitle {
-    font-size: 1.2rem;
-    color: #666;
-    margin-bottom: 2rem;
-}
-
-.dark-mode .subtitle {
-    color: #aaa;
-}
-
-.card-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.card {
-    background-color: var(--card-light);
-    border-radius: var(--radius);
-    padding: 2rem;
-    box-shadow: var(--shadow-light);
-    transition: var(--transition);
-}
-
-.dark-mode .card {
-    background-color: var(--card-dark);
-    box-shadow: var(--shadow-dark);
-}
-
-h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    position: relative;
-    display: inline-block;
-}
-
-h2::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background-color: var(--primary-color);
-}
-
-/* Form Styles */
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-}
-
-input, textarea, select {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius);
-    font-family: inherit;
-    font-size: 1rem;
-    transition: var(--transition);
-    background-color: var(--card-light);
-    color: var(--text-dark);
-}
-
-.dark-mode input, 
-.dark-mode textarea, 
-.dark-mode select {
-    border-color: var(--border-dark);
-    background-color: var(--card-dark);
-    color: var(--text-light);
-}
-
-input:focus, textarea:focus, select:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(165, 0, 52, 0.2);
-}
-
-textarea {
-    resize: vertical;
-    min-height: 100px;
-}
-
-/* Equipment Table Styles */
-.equipment-table-container {
-    overflow-x: auto;
-    margin-bottom: 1rem;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    padding: 0.75rem;
-    text-align: left;
-    border-bottom: 1px solid var(--border-light);
-}
-
-.dark-mode th, 
-.dark-mode td {
-    border-bottom-color: var(--border-dark);
-}
-
-th {
-    font-weight: 500;
-    background-color: rgba(0, 0, 0, 0.02);
-}
-
-.dark-mode th {
-    background-color: rgba(255, 255, 255, 0.02);
-}
-
-.equipment-row td {
-    padding: 0.3rem;
-}
-
-.equipment-row input {
-    border: none;
-    padding: 0.5rem;
-    box-shadow: none;
-}
-
-.equipment-row input:focus {
-    border: 1px solid var(--primary-color);
-}
-
-/* Link Preview Styles */
-.link-preview-container {
-    margin-top: 1.5rem;
-    transition: var(--transition);
-}
-
-.link-preview {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.link-preview textarea {
-    min-height: 60px;
-    font-family: monospace;
-    font-size: 0.9rem;
-    padding: 1rem;
-}
-
-.hidden {
-    display: none;
-}
-
-/* Accordion Styles */
-.accordion-item {
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius);
-    margin-bottom: 1rem;
-    overflow: hidden;
-}
-
-.dark-mode .accordion-item {
-    border-color: var(--border-dark);
-}
-
-.accordion-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.02);
-    transition: var(--transition);
-}
-
-.dark-mode .accordion-header {
-    background-color: rgba(255, 255, 255, 0.02);
-}
-
-.accordion-header:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-}
-
-.dark-mode .accordion-header:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-}
-
-.accordion-item h3 {
-    font-size: 1.1rem;
-    font-weight: 500;
-    margin: 0;
-}
-
-.accordion-icon {
-    transition: var(--transition);
-}
-
-.accordion-item.active .accordion-icon {
-    transform: rotate(180deg);
-}
-
-.accordion-content {
-    padding: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: var(--transition);
-}
-
-.accordion-item.active .accordion-content {
-    padding: 1rem;
-    max-height: 500px;
-}
-
-/* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background-color: var(--card-light);
-    border-radius: var(--radius);
-    width: 100%;
-    max-width: 600px;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: var(--shadow-light);
-}
-
-.map-modal-content {
-    max-width: 800px;
-}
-
-.dark-mode .modal-content {
-    background-color: var(--card-dark);
-    box-shadow: var(--shadow-dark);
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem;
-    border-bottom: 1px solid var(--border-light);
-}
-
-.dark-mode .modal-header {
-    border-bottom-color: var(--border-dark);
-}
-
-.close-modal {
-    cursor: pointer;
-    font-size: 1.5rem;
-    transition: var(--transition);
-}
-
-.close-modal:hover {
-    color: var(--primary-color);
-}
-
-.modal-body {
-    padding: 1.5rem;
-}
-
-.modal-footer {
-    padding: 1.5rem;
-    display: flex;
-    justify-content: flex-end;
-}
-
-/* Map Styles */
-.map-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.map-image {
-    width: 100%;
-    border-radius: var(--radius);
-}
-
-.map-legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.legend-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.legend-color {
-    width: 16px;
-    height: 16px;
-    border-radius: 3px;
-}
-
-.entrance {
-    background-color: #4CAF50;
-}
-
-.parking {
-    background-color: #2196F3;
-}
-
-.classroom {
-    background-color: #FF9800;
-}
-
-/* Toast Notification */
-.toast {
-    position: fixed;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background-color: #333;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    opacity: 0;
-    transition: var(--transition);
-    z-index: 1000;
-}
-
-.toast.show {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
-}
-
-/* Notification Banner */
-.notification-banner {
-    position: fixed;
-    top: -100px;
-    left: 0;
-    width: 100%;
-    background-color: var(--secondary-color);
-    color: white;
-    padding: 0.75rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: var(--transition);
-    z-index: 90;
-}
-
-.notification-banner.show {
-    top: 60px;
-}
-
-.notification-content {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.close-notification {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-}
-
-/* Footer Styles */
-footer {
-    text-align: center;
-    padding: 1.5rem;
-    font-size: 0.9rem;
-    color: #666;
-}
-
-.dark-mode footer {
-    color: #aaa;
-}
-
-/* Utility Classes */
-.material-symbols-rounded {
-    font-variation-settings:
-        'FILL' 0,
-        'wght' 400,
-        'GRAD' 0,
-        'opsz' 24;
-    vertical-align: middle;
-}
-
-/* Wave Effect */
-.wave-effect {
-    position: absolute;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.7);
-    transform: scale(0);
-    animation: ripple 0.8s linear;
-    pointer-events: none;
-}
-
-@keyframes ripple {
-    to {
-        transform: scale(4);
-        opacity: 0;
-    }
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 2.5rem;
-    }
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LG Science Park 방문 안내</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+<body class="light-mode">
+    <div class="cursor-trail"></div>
     
-    .card {
-        padding: 1.5rem;
-    }
-    
-    .button-group {
-        flex-direction: column;
-    }
-    
-    .notification-banner.show {
-        top: 50px;
-    }
-    
-    header {
-        padding: 0.75rem 1rem;
-    }
+    <header>
+        <div class="theme-toggle">
+            <span class="material-symbols-rounded light-icon">light_mode</span>
+            <label class="switch">
+                <input type="checkbox" id="theme-switch">
+                <span class="slider round"></span>
+            </label>
+            <span class="material-symbols-rounded dark-icon">dark_mode</span>
+        </div>
+        
+        <button id="cert-btn" class="button primary-button">
+            <span class="material-symbols-rounded">verified</span>인정신청
+        </button>
+    </header>
 
-    .theme-toggle .material-symbols-rounded {
-        font-size: 20px;
-    }
-}
+    <div class="notification-banner" id="notification-banner">
+        <div class="notification-content">
+            <span class="material-symbols-rounded">notifications</span>
+            <p>방문 전 장비 정보를 등록하면 출입이 신속하게 처리됩니다.</p>
+        </div>
+        <button class="close-notification">
+            <span class="material-symbols-rounded">close</span>
+        </button>
+    </div>
 
-@media (max-width: 480px) {
-    h1 {
-        font-size: 2rem;
-    }
-    
-    .modal-content {
-        width: 95%;
-    }
-    
-    .button {
-        width: 100%;
-    }
-}
+    <main>
+        <section class="hero" data-aos="fade-up">
+            <h1>LG Science Park 방문 안내</h1>
+            <p class="subtitle">강사님을 위한 안내 페이지입니다.</p>
+            <button id="visit-guide-btn" class="button primary-button">
+                <span class="material-symbols-rounded">map</span>방문안내
+            </button>
+        </section>
 
-/* Print Styles */
-@media print {
-    body {
-        background-color: white;
-        color: black;
-    }
+        <div class="card-container">
+            <section id="instructor-info" class="card" data-aos="fade-up">
+                <h2>강사 정보</h2>
+                <div class="form-group">
+                    <label for="name">이름</label>
+                    <input type="text" id="name" placeholder="홍길동" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="affiliation">소속</label>
+                    <input type="text" id="affiliation" placeholder="소속기관" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="contact">연락처</label>
+                    <input type="tel" id="contact" placeholder="010-0000-0000" autocomplete="off">
+                </div>
+            </section>
+
+            <section id="equipment-info" class="card" data-aos="fade-up" data-aos-delay="100">
+                <h2>반입 장비 등록</h2>
+                <div class="equipment-table-container">
+                    <table id="equipment-table">
+                        <thead>
+                            <tr>
+                                <th>장비명</th>
+                                <th>제조사</th>
+                                <th>MAC 주소</th>
+                                <th>비고</th>
+                                <th>관리</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="equipment-row">
+                                <td><input type="text" placeholder="노트북" class="eq-name"></td>
+                                <td><input type="text" placeholder="제조사" class="eq-brand"></td>
+                                <td><input type="text" placeholder="XX:XX:XX:XX:XX:XX" class="eq-mac"></td>
+                                <td><input type="text" placeholder="비고" class="eq-note"></td>
+                                <td>
+                                    <button class="icon-button delete-equipment">
+                                        <span class="material-symbols-rounded">delete</span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button id="add-equipment" class="button outline-button">
+                    <span class="material-symbols-rounded">add</span>장비 추가
+                </button>
+            </section>
+
+            <section id="additional-info" class="card" data-aos="fade-up" data-aos-delay="200">
+                <h2>추가 요청사항</h2>
+                <div class="form-group">
+                    <label for="requests">기타 요청사항</label>
+                    <textarea id="requests" placeholder="추가 요청사항이 있으시면 입력해주세요." rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <div class="map-link">
+                        <button id="show-map" class="button secondary-button">
+                            <span class="material-symbols-rounded">map</span>교재 지도 보기
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="generate-link" class="card" data-aos="fade-up" data-aos-delay="300">
+                <h2>방문 정보 링크 생성</h2>
+                <p>입력하신 정보로 링크를 생성하여 담당자에게 전달해주세요.</p>
+                <div class="button-group">
+                    <button id="preview-data" class="button outline-button">
+                        <span class="material-symbols-rounded">preview</span>미리보기
+                    </button>
+                    <button id="generate-url" class="button primary-button">
+                        <span class="material-symbols-rounded">link</span>링크 생성
+                    </button>
+                </div>
+                <div class="link-preview-container hidden" id="link-preview-container">
+                    <div class="link-preview">
+                        <textarea id="generated-link" readonly></textarea>
+                        <button id="copy-link" class="button secondary-button">
+                            <span class="material-symbols-rounded">content_copy</span>링크 복사
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="faq" class="card" data-aos="fade-up" data-aos-delay="400">
+                <h2>자주 묻는 질문 (FAQ)</h2>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h3>방문 전 미리 등록해야 하나요?</h3>
+                            <span class="material-symbols-rounded accordion-icon">expand_more</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>네, 방문 최소 1일 전까지 장비 정보를 등록해주시면 출입이 원활합니다. 당일 등록 시 출입증 발급에 시간이 소요될 수 있습니다.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h3>주차는 어디에 할 수 있나요?</h3>
+                            <span class="material-symbols-rounded accordion-icon">expand_more</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>LG 사이언스파크 지하 주차장을 이용하실 수 있으며, 방문자 주차구역은 B2~B3층에 위치해 있습니다. 주차 등록은 안내데스크에서 도움 받으실 수 있습니다.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h3>반입 불가능한 장비가 있나요?</h3>
+                            <span class="material-symbols-rounded accordion-icon">expand_more</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>보안상의 이유로 녹음/녹화 전용 장비와 드론 등은 반입이 제한될 수 있습니다. 특수 장비의 경우 사전에 담당자와 협의 부탁드립니다.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h3>WiFi는 어떻게 연결하나요?</h3>
+                            <span class="material-symbols-rounded accordion-icon">expand_more</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>방문자용 WiFi는 'LG_GUEST'를 선택하신 후, 안내데스크에서 받으신 임시 계정으로 접속하실 수 있습니다. 강의실에는 별도의 강의용 네트워크가 준비되어 있습니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div id="modal" class="modal">
+        <div class="modal-content" data-aos="zoom-in">
+            <div class="modal-header">
+                <h2>입력 정보 확인</h2>
+                <span class="material-symbols-rounded close-modal">close</span>
+            </div>
+            <div class="modal-body">
+                <div id="preview-content"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="confirm-preview" class="button primary-button">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="map-modal" class="modal">
+        <div class="modal-content map-modal-content" data-aos="zoom-in">
+            <div class="modal-header">
+                <h2>LG 사이언스파크 지도</h2>
+                <span class="material-symbols-rounded close-modal">close</span>
+            </div>
+            <div class="modal-body">
+                <div class="map-container">
+                    <img src="https://via.placeholder.com/800x500" alt="LG 사이언스파크 지도" class="map-image">
+                    <div class="map-legend">
+                        <div class="legend-item">
+                            <span class="legend-color entrance"></span>
+                            <span>주 출입구</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color parking"></span>
+                            <span>방문자 주차장</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color classroom"></span>
+                            <span>강의실</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="button primary-button close-modal">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">
+        <span class="material-symbols-rounded toast-icon">check_circle</span>
+        <span class="toast-message">링크가 복사되었습니다!</span>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 LG Science Park. All rights reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
