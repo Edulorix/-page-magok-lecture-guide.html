@@ -261,34 +261,6 @@
       left: -10px;
     }
 
-    /* Custom Cursor */
-    .cursor-dot,
-    .cursor-outline {
-      pointer-events: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      z-index: 9999;
-      transition: opacity 0.3s ease;
-    }
-
-    .cursor-dot {
-      width: 8px;
-      height: 8px;
-      background-color: var(--lg-red);
-      z-index: 10000;
-    }
-
-    .cursor-outline {
-      width: 40px;
-      height: 40px;
-      border: 2px solid var(--lg-red);
-      z-index: 9999;
-      transition: all 0.1s ease-out;
-    }
-
     /* Form Elements */
     .form-group {
       margin-bottom: 1.5rem;
@@ -369,43 +341,32 @@
       background-color: var(--neutral-600);
     }
 
-    /* Tooltip */
-    .tooltip {
-      position: relative;
-      display: inline-block;
+    /* Custom Cursor */
+    .cursor-dot,
+    .cursor-outline {
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      z-index: 9999;
+      transition: opacity 0.3s ease;
     }
 
-    .tooltip .tooltip-text {
-      visibility: hidden;
-      width: 200px;
-      background-color: var(--neutral-800);
-      color: white;
-      text-align: center;
-      border-radius: 0.25rem;
-      padding: 0.5rem;
-      position: absolute;
-      z-index: 10;
-      bottom: 125%;
-      left: 50%;
-      transform: translateX(-50%);
-      opacity: 0;
-      transition: opacity 0.3s;
+    .cursor-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--lg-red);
+      z-index: 10000;
     }
 
-    .tooltip .tooltip-text::after {
-      content: "";
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      margin-left: -5px;
-      border-width: 5px;
-      border-style: solid;
-      border-color: var(--neutral-800) transparent transparent transparent;
-    }
-
-    .tooltip:hover .tooltip-text {
-      visibility: visible;
-      opacity: 1;
+    .cursor-outline {
+      width: 40px;
+      height: 40px;
+      border: 2px solid var(--lg-red);
+      z-index: 9999;
+      transition: all 0.1s ease-out;
     }
 
     /* Progress Bar */
@@ -474,50 +435,6 @@
 
     .floating-btn i {
       font-size: 1.5rem;
-    }
-
-    /* Emoji Animation */
-    @keyframes emojiAnimation {
-      0% { transform: scale(0); opacity: 1; }
-      50% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(1); opacity: 0; }
-    }
-
-    .emoji {
-      position: absolute;
-      font-size: 2rem;
-      pointer-events: none;
-      z-index: 9995;
-      animation: emojiAnimation 0.6s forwards;
-    }
-
-    /* Dark Mode Toggle */
-    .dark-mode-toggle {
-      position: relative;
-      width: 60px;
-      height: 30px;
-      border-radius: 15px;
-      background-color: var(--neutral-300);
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    body.dark-mode .dark-mode-toggle {
-      background-color: var(--lg-red);
-    }
-
-    .dark-mode-toggle::before {
-      content: '☀️';
-      position: absolute;
-      left: 5px;
-      top: 3px;
-      font-size: 18px;
-      transition: transform 0.3s;
-    }
-
-    body.dark-mode .dark-mode-toggle::before {
-      content: '🌙';
-      transform: translateX(30px);
     }
 
     /* Accordion */
@@ -628,6 +545,50 @@
         padding-left: 50px;
       }
     }
+
+    /* Emoji Animation */
+    @keyframes emojiAnimation {
+      0% { transform: scale(0); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); opacity: 0; }
+    }
+
+    .emoji {
+      position: absolute;
+      font-size: 2rem;
+      pointer-events: none;
+      z-index: 9995;
+      animation: emojiAnimation 0.6s forwards;
+    }
+
+    /* Dark Mode Toggle */
+    .dark-mode-toggle {
+      position: relative;
+      width: 60px;
+      height: 30px;
+      border-radius: 15px;
+      background-color: var(--neutral-300);
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    body.dark-mode .dark-mode-toggle {
+      background-color: var(--lg-red);
+    }
+
+    .dark-mode-toggle::before {
+      content: '☀️';
+      position: absolute;
+      left: 5px;
+      top: 3px;
+      font-size: 18px;
+      transition: transform 0.3s;
+    }
+
+    body.dark-mode .dark-mode-toggle::before {
+      content: '🌙';
+      transform: translateX(30px);
+    }
   </style>
 </head>
 <body>
@@ -679,7 +640,6 @@
         <p class="text-gray-500 dark:text-gray-400 text-center py-4">최근 제출 기록을 불러오는 중...</p>
       </div>
     </section>
-
     <!-- Timeline Layout -->
     <div class="timeline mt-16">
       <!-- Visit Information Section -->
@@ -786,8 +746,22 @@
               </h3>
               <div class="mt-3 space-y-3">
                 <div class="flex items-center">
-                  <input type="checkbox" id="pdf-material" class="w-4 h-4 mr-2">
+                  <input type="checkbox" id="pdf-material" class="w-4 h-4 mr-2 checklist-trigger">
                   <label for="pdf-material">PDF 교재</label>
                 </div>
                 <div id="pdf-material-file" class="hidden ml-6">
                   <input type="file" id="pdf-file" class="hidden">
+                  <label for="pdf-file" class="btn btn-secondary">
+                    <i class="fas fa-file-pdf mr-2"></i> 파일 선택
+                  </label>
+                  <span id="pdf-file-name" class="ml-3 text-gray-500">선택된 파일 없음</span>
+                </div>
+                
+                <div class="flex items-center mt-2">
+                  <input type="checkbox" id="printed-material" class="w-4 h-4 mr-2 checklist-trigger">
+                  <label for="printed-material">서면 교재</label>
+                </div>
+                <div id="printed-material-info" class="hidden ml-6">
+                  <div class="bg-gray-50 p-4 rounded-lg dark:bg-gray-800">
+                    <p class="flex items-center">
+                      <i class="fas fa-shipping-fast text-red-
