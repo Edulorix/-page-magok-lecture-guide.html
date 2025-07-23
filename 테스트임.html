@@ -1640,7 +1640,7 @@
     const GOOGLE_CLIENT_ID = '433099120178-3evl28b1be3ob6c2ib08ff6cc2fd7kve.apps.googleusercontent.com';
     const GOOGLE_API_KEY = 'AIzaSyAMdyzcjK7eUKQqTTk_TgrT0-kmlXYVXeI';
     const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
-    const SCOPES = 'https://www.googleapis.com/auth/drive.file';
+    const SCOPES = 'https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive';
     const FOLDER_ID = '1xUFv6QUqsAiGPfmC4mzXry5pQ-6BRGN_'; // SW-강의자료 업로드 폴더 ID
 
     let gapi, tokenClient, isInitialized = false;
@@ -1694,8 +1694,11 @@
           document.getElementById('auth-button').style.display = 'none';
           resolve(resp);
         };
-        tokenClient.requestAccessToken({prompt: 'consent'});
-      });
+       tokenClient.requestAccessToken({
+ prompt: 'consent',
+ include_granted_scopes: true,
+ enable_granular_consent: true
+});
     }
 
     // Google Drive 직접 업로드
